@@ -47,8 +47,8 @@ class MediaRepositoryTest extends KernelTestCase
         return array(
             array('Lorem', 2),
             array('Sit', 0),
-            array('Dolor', 1),
-            array('Lorem,Dolor', 2),
+            array('Dolor', 2),
+            array('Lorem,Dolor', 3),
         );
     }
 }
