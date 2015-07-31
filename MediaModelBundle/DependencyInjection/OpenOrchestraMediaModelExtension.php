@@ -28,7 +28,7 @@ class OpenOrchestraMediaModelExtension extends Extension
             if (is_array($content)) {
                 $container->setParameter('open_orchestra_media.document.' . $class . '.class', $content['class']);
                 $definition = new Definition($content['repository'], array($content['class']));
-                $definition->setFactory(array(new Reference('doctrine.odm.mongodb.document_manager'), 'getRepository'));
+                $definition->setFactory(array(new Reference('document_manager'), 'getRepository'));
                 $container->setDefinition('open_orchestra_media.repository.' . $class, $definition);
             }
         }
