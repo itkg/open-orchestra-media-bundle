@@ -88,19 +88,26 @@ class ImageResizerManager
     }
 
     /**
+     * Resize an image keeping its ratio
+     *
      * @param string  $format
      * @param Imagick $image
      */
     protected function resizeImage($format, Imagick $image)
     {
-        if (array_key_exists('width', $format) && array_key_exists('height', $format)) {
-            $this->resizeInBox($image, $format['width'], $format['height']);
+        $maxWidth = array_key_exists('max_width', $format)? $format['max_width']: -1;
+        $maxHeight = array_key_exists('max_height', $format)? $format['max_height']: -1;
 
-        } elseif (array_key_exists('max_height', $format)) {
-            $this->resizeOnHeight($image, $format['max_height']);
+        if ($maxWidth + $maxHeight != -2) {
+            $image->setimagebackgroundcolor('#000000');
+            $refRatio = $maxWidth / $maxHeight;
+            $imageRatio = $image->getImageWidth() / $image->getImageHeight();
 
-        } elseif (array_key_exists('max_width', $format)) {
-            $this->resizeOnWidth($image, $format['max_width']);
+            if ($refRatio > $imageRatio || $maxHeight == -1) {
+                $this->resizeOnHeight($image, $maxHeight);
+            } else {
+                $this->resizeOnWidth($image, $maxWidth);
+            }
         }
     }
 
@@ -124,26 +131,6 @@ class ImageResizerManager
     protected function resizeOnHeight(Imagick $image, $height)
     {
         $image->resizeImage(0, $height, Imagick::FILTER_LANCZOS, 1);
-    }
-
-    /**
-     * Resize an image keeping its ratio to make it standing in a box of width $width and height $height
-     * 
-     * @param Imagick $image
-     * @param int $width
-     * @param int $height
-     */
-    protected function resizeInBox(Imagick $image, $width, $height)
-    {
-        $image->setimagebackgroundcolor('#000000');
-        $refRatio = $width / $height;
-        $imageRatio = $image->getImageWidth() / $image->getImageHeight();
-
-        if ($refRatio > $imageRatio) {
-            $this->resizeOnHeight($image, $height);
-        } else {
-            $this->resizeOnWidth($image, $width);
-        }
     }
 
     /**
