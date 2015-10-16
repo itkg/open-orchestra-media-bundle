@@ -21,7 +21,7 @@ class DisplayMediaExtension extends \Twig_Extension
      * @param MediaRepositoryInterface $mediaRepository
      * @param RequestStack             $requestStack
      */
-    public function __construct(DisplayMediaManager $displayMediaManager, MediaRepositoryInterface $mediaRepository, RequestStack $requestStack)
+    public function __construct(DisplayMediaManager $displayMediaManager, MediaRepositoryInterface $mediaRepository = null, RequestStack $requestStack)
     {
         $this->displayMediaManager = $displayMediaManager;
         $this->mediaRepository = $mediaRepository;

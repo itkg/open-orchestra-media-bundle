@@ -17,7 +17,7 @@ class MediaCodeDefinition extends AbstractMediaCodeDefinition
      * @param DisplayMediaManager      $displayMediaManager
      * @param string                   $mediaNotFoundHtmlTag
      */
-    public function __construct(MediaRepositoryInterface $repository, DisplayMediaManager $displayMediaManager, $mediaNotFoundHtmlTag)
+    public function __construct(MediaRepositoryInterface $repository = null, DisplayMediaManager $displayMediaManager, $mediaNotFoundHtmlTag)
     {
         parent::__construct($repository, $displayMediaManager, $mediaNotFoundHtmlTag);
         $this->useOption = true;
