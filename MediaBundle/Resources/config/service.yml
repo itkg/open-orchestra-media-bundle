@@ -9,13 +9,13 @@ services:
     open_orchestra_media.bbcode.definition.media:
         class: %open_orchestra_media.bbcode.definition.media.class%
         arguments:
-            - @open_orchestra_media.repository.media
+            - ?@open_orchestra_media.repository.media
             - @open_orchestra_media.display_media_manager
             - @templating
     open_orchestra_media.bbcode.definition.media_without_format:
         class: %open_orchestra_media.bbcode.definition.media_without_format.class%
         arguments:
-            - @open_orchestra_media.repository.media
+            - ?@open_orchestra_media.repository.media
             - @open_orchestra_media.display_media_manager
             - @templating
     open_orchestra_media.bbcode.code_definitions:
