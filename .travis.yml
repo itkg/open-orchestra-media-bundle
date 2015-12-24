@@ -9,9 +9,6 @@ cache:
   directories:
     - ~/.composer/cache
 
-before_install:
-  - phpenv config-add .travis.php.ini
-
 install:
   - composer install --no-progress --prefer-dist
 
