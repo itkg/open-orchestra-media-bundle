@@ -2,3 +2,4 @@ resolve_target_documents:
     OpenOrchestra\Media\Model\FolderInterface: OpenOrchestra\MediaModelBundle\Document\Folder
     OpenOrchestra\Media\Model\MediaFolderInterface: %open_orchestra_media.document.media_folder.class%
     OpenOrchestra\Media\Model\MediaInterface: %open_orchestra_media.document.media.class%
+    OpenOrchestra\Media\Model\MediaFolderGroupRoleInterface: %open_orchestra_media.document.media_folder_group_role.class%
