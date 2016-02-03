@@ -17,7 +17,6 @@ interface FolderRepositoryInterface
 
     /**
      * @param string $siteId
-     * @param string $parent
      *
      * @return array
      */
@@ -29,4 +28,23 @@ interface FolderRepositoryInterface
      * @return FolderInterface
      */
     public function find($id);
+
+    /**
+     * @param string $parentId
+     * @param string $siteId
+     *
+     * @throws \Exception
+     *
+     * @return Collection
+     */
+    public function findByParentAndSite($parentId, $siteId);
+
+    /**
+     * @param string $siteId
+     *
+     * @throws \Exception
+     *
+     * @return Collection
+     */
+    public function findFolderBySiteId($siteId);
 }
