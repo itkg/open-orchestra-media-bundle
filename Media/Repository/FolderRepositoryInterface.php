@@ -40,11 +40,12 @@ interface FolderRepositoryInterface
     public function findByParentAndSite($parentId, $siteId);
 
     /**
-     * @param string $siteId
+     * @param string      $siteId
+     * @param string|null $parentId
      *
      * @throws \Exception
      *
      * @return Collection
      */
-    public function findFolderBySiteId($siteId);
+    public function findBySiteId($siteId, $parentId = null);
 }
