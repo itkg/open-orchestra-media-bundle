@@ -1,6 +1,7 @@
 <?php
 
 namespace OpenOrchestra\Media\Model;
+
 use OpenOrchestra\BackofficeBundle\Model\GroupRoleInterface;
 
 /**
