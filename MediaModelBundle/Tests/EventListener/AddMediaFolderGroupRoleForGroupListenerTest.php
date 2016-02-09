@@ -43,19 +43,19 @@ class AddMediaFolderGroupRoleForGroupListenerTest extends AbstractMediaFolderGro
     /**
      * @param SiteInterface|null  $site
      * @param array               $folders
-     * @param int                 $countMFGR
+     * @param int                 $count
      *
      * @dataProvider provideSiteAndFolders
      */
-    public function testPrePersist($site, array $folders, $countMFGR)
+    public function testPrePersist($site, array $folders, $count)
     {
-        $countMFGR = count($this->mediaFolderRoles) * $countMFGR;
+        $count = count($this->mediaFolderRoles) * $count;
         Phake::when($this->lifecycleEventArgs)->getDocument()->thenReturn($this->group);
         Phake::when($this->group)->getSite()->thenReturn($site);
         Phake::when($this->folderRepository)->findBySiteId(Phake::anyParameters())->thenReturn($folders);
         $this->listener->prePersist($this->lifecycleEventArgs);
 
-        Phake::verify($this->group, Phake::times($countMFGR))->addMediaFolderRole(Phake::anyParameters());
+        Phake::verify($this->group, Phake::times($count))->addMediaFolderRole(Phake::anyParameters());
     }
 
     /**
