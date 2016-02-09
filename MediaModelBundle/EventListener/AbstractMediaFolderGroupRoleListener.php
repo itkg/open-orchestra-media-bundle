@@ -60,7 +60,7 @@ class AbstractMediaFolderGroupRoleListener
      * @return MediaFolderGroupRoleInterface
      * @throws MediaFolderGroupRoleNotFoundException
      */
-    protected function createMediaFolderGroupRole($folder, $group, $role, $accessType)
+    protected function createMediaFolderGroupRole(FolderInterface $folder, GroupInterface $group, $role, $accessType)
     {
         /** @var $mediaFolderGroupRole MediaFolderGroupRoleInterface */
         $mediaFolderGroupRole = new $this->mediaFolderGroupRoleClass();

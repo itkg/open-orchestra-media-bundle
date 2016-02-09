@@ -42,9 +42,9 @@ class AddMediaFolderGroupRoleForFolderListenerTest extends AbstractMediaFolderGr
     }
 
     /**
-     * @param array               $groups
-     * @param array               $sites
-     * @param int                 $countMFGR
+     * @param array $groups
+     * @param array $sites
+     * @param int   $countMFGR
      *
      * @dataProvider provideGroupAndSite
      */
