@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenOrchestra\GroupBundle\Tests\EventListener;
+namespace OpenOrchestra\MediaModelBundle\Tests\EventListener;
 
 use Phake;
 use OpenOrchestra\MediaModelBundle\EventListener\AddMediaFolderGroupRoleForFolderListener;
