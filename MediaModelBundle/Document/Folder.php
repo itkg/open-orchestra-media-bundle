@@ -161,6 +161,22 @@ abstract class Folder implements FolderInterface
     }
 
     /**
+     * @param string $siteId
+     *
+     * @return bool
+     */
+    public function hasSite($siteId)
+    {
+        foreach ($this->sites as $site) {
+            if (isset($site['siteId']) && $site['siteId'] === $siteId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param array $site
      */
     public function addSite(array $site)

@@ -1,0 +1,28 @@
+parameters:
+     open_orchestra_media.listener.update_media_folder_group_role.class: OpenOrchestra\MediaModelBundle\EventListener\UpdateMediaFolderGroupRoleListener
+     open_orchestra_media.listener.add_media_folder_group_role_for_group.class: OpenOrchestra\MediaModelBundle\EventListener\AddMediaFolderGroupRoleForGroupListener
+     open_orchestra_media.listener.add_media_folder_group_role_for_folder.class: OpenOrchestra\MediaModelBundle\EventListener\AddMediaFolderGroupRoleForFolderListener
+
+services:
+    open_orchestra_media.listener.update_media_folder_group_role:
+        class: %open_orchestra_media.listener.update_media_folder_group_role.class%
+        arguments:
+            - %open_orchestra_media.document.folder.class%
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: preUpdate }
+    open_orchestra_media.listener.add_media_folder_group_role_for_group:
+        class: %open_orchestra_media.listener.add_media_folder_group_role_for_group.class%
+        arguments:
+            - %open_orchestra_media.document.media_folder_group_role.class%
+        calls:
+            - [ setContainer, [ @service_container ] ]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: prePersist }
+    open_orchestra_media.listener.add_media_folder_group_role_for_folder:
+        class: %open_orchestra_media.listener.add_media_folder_group_role_for_folder.class%
+        arguments:
+            - %open_orchestra_media.document.media_folder_group_role.class%
+        calls:
+            - [ setContainer, [ @service_container ] ]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: postPersist }
