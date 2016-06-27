@@ -9,31 +9,31 @@ parameters:
 
 services:
     open_orchestra_media.display.media_list_by_keyword:
-        class: %open_orchestra_media.display.media_list_by_keyword.class%
+        class: '%open_orchestra_media.display.media_list_by_keyword.class%'
         arguments:
-            - @open_orchestra_media.repository.media
-            - @open_orchestra_base.manager.tag
-            - %open_orchestra_media.display.media_list_by_keyword.template%
+            - '@open_orchestra_media.repository.media'
+            - '@open_orchestra_base.manager.tag'
+            - '%open_orchestra_media.display.media_list_by_keyword.template%'
         tags:
             - { name: open_orchestra_display.display_block.strategy }
     open_orchestra_media.display.gallery:
-        class: %open_orchestra_media.display.gallery.class%
+        class: '%open_orchestra_media.display.gallery.class%'
         arguments:
-            - @request_stack
-            - @open_orchestra_base.manager.tag
-            - %open_orchestra_media.display.gallery.template%
+            - '@request_stack'
+            - '@open_orchestra_base.manager.tag'
+            - '%open_orchestra_media.display.gallery.template%'
         tags:
             - { name: open_orchestra_display.display_block.strategy }
     open_orchestra_media.display.display_media:
-        class: %open_orchestra_media.display.display_media.class%
+        class: '%open_orchestra_media.display.display_media.class%'
         arguments:
-            - @open_orchestra_model.repository.node
-            - %open_orchestra_media.display.display_media.template%
+            - '@open_orchestra_model.repository.node'
+            - '%open_orchestra_media.display.display_media.template%'
         tags:
             - { name: open_orchestra_display.display_block.strategy }
     open_orchestra_media.display.slideshow:
-        class: %open_orchestra_media.display.slideshow.class%
+        class: '%open_orchestra_media.display.slideshow.class%'
         arguments:
-            - @open_orchestra_base.manager.tag
+            - '@open_orchestra_base.manager.tag'
         tags:
             - { name: open_orchestra_display.display_block.strategy }

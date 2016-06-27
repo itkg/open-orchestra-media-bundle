@@ -3,10 +3,10 @@ parameters:
 
 services:
     open_orchestra_media.twig.display_media.extension:
-        class: %open_orchestra_media.twig.display_media.extension.class%
+        class: '%open_orchestra_media.twig.display_media.extension.class%'
         arguments:
-            - @open_orchestra_media.display_media_manager
-            - @open_orchestra_media.repository.media
-            - @request_stack
+            - '@open_orchestra_media.display_media_manager'
+            - '@open_orchestra_media.repository.media'
+            - '@request_stack'
         tags:
             - { name: twig.extension }

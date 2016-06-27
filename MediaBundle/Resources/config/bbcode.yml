@@ -5,21 +5,21 @@ parameters:
 
 services:
     open_orchestra_media.bbcode.definition.media:
-        class: %open_orchestra_media.bbcode.definition.media.class%
+        class: '%open_orchestra_media.bbcode.definition.media.class%'
         arguments:
-            - @open_orchestra_media.repository.media
-            - @open_orchestra_media.display_media_manager
-            - @templating
+            - '@open_orchestra_media.repository.media'
+            - '@open_orchestra_media.display_media_manager'
+            - '@templating'
     open_orchestra_media.bbcode.definition.media_without_format:
-        class: %open_orchestra_media.bbcode.definition.media_without_format.class%
+        class: '%open_orchestra_media.bbcode.definition.media_without_format.class%'
         arguments:
-            - @open_orchestra_media.repository.media
-            - @open_orchestra_media.display_media_manager
-            - @templating
+            - '@open_orchestra_media.repository.media'
+            - '@open_orchestra_media.display_media_manager'
+            - '@templating'
     open_orchestra_media.bbcode.code_definitions:
-        class: %open_orchestra_media.bbcode.code_definitions.class%
+        class: '%open_orchestra_media.bbcode.code_definitions.class%'
         arguments:
-            - @open_orchestra_media.bbcode.definition.media
-            - @open_orchestra_media.bbcode.definition.media_without_format
+            - '@open_orchestra_media.bbcode.definition.media'
+            - '@open_orchestra_media.bbcode.definition.media_without_format'
         tags:
             - { name: open_orchestra_bbcode.code_definitions }

@@ -8,52 +8,52 @@ parameters:
 
 services:
     open_orchestra_media.display_media_manager:
-        class: %open_orchestra_media.display_media_manager.class%
+        class: '%open_orchestra_media.display_media_manager.class%'
         arguments:
-            - @router
-            - @open_orchestra_media.display_media.default
+            - '@router'
+            - '@open_orchestra_media.display_media.default'
     open_orchestra_media.display_media.image:
-        class: %open_orchestra_media.display_media.image.class%
+        class: '%open_orchestra_media.display_media.image.class%'
         arguments:
-            - @request_stack
-            - %open_orchestra_media.media_domain%
+            - '@request_stack'
+            - '%open_orchestra_media.media_domain%'
         calls:
-            - [ setContainer, [ @service_container ] ]
+            - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.pdf:
-        class: %open_orchestra_media.display_media.pdf.class%
+        class: '%open_orchestra_media.display_media.pdf.class%'
         arguments:
-            - @request_stack
-            - %open_orchestra_media.media_domain%
+            - '@request_stack'
+            - '%open_orchestra_media.media_domain%'
         calls:
-            - [ setContainer, [ @service_container ] ]
+            - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.video:
-        class: %open_orchestra_media.display_media.video.class%
+        class: '%open_orchestra_media.display_media.video.class%'
         arguments:
-            - @request_stack
-            - %open_orchestra_media.media_domain%
+            - '@request_stack'
+            - '%open_orchestra_media.media_domain%'
         calls:
-            - [ setContainer, [ @service_container ] ]
+            - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.audio:
-        class: %open_orchestra_media.display_media.audio.class%
+        class: '%open_orchestra_media.display_media.audio.class%'
         arguments:
-            - @request_stack
-            - %open_orchestra_media.media_domain%
+            - '@request_stack'
+            - '%open_orchestra_media.media_domain%'
         calls:
-            - [ setContainer, [ @service_container ] ]
+            - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.default:
-        class: %open_orchestra_media.display_media.default.class%
+        class: '%open_orchestra_media.display_media.default.class%'
         arguments:
-            - @request_stack
-            - %open_orchestra_media.media_domain%
+            - '@request_stack'
+            - '%open_orchestra_media.media_domain%'
         calls:
-            - [ setContainer, [ @service_container ] ]
+            - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
