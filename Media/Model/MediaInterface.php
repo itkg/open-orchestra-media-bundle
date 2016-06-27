@@ -2,7 +2,7 @@
 
 namespace OpenOrchestra\Media\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use OpenOrchestra\ModelInterface\Model\KeywordableInterface;
 use OpenOrchestra\ModelInterface\Model\TranslatedValueContainerInterface;
 use OpenOrchestra\ModelInterface\Model\TranslatedValueInterface;
@@ -82,7 +82,7 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
      */
     public function setMimeType($mimeType);
 
-/**
+    /**
      * @return string
      */
     public function getThumbnail();
@@ -100,7 +100,7 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
     public function getAlt($language = 'en');
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getAlts();
 
@@ -125,7 +125,7 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
     public function setCopyright($copyright);
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getTitles();
 
