@@ -16,8 +16,7 @@
     "open-orchestra/open-orchestra-bbcode-bundle": "self.version",
     "open-orchestra/open-orchestra-display-bundle": "self.version",
     "open-orchestra/open-orchestra-model-interface": "self.version",
-    "open-orchestra/open-orchestra-mongo-libs": "self.version",
-    "innocead/captcha-bundle": "@dev"
+    "open-orchestra/open-orchestra-mongo-libs": "self.version"
   },
 
   "require-dev": {
