@@ -11,7 +11,6 @@
 
   "require": {
     "php": "~5.6.0",
-    "doctrine/data-fixtures": "~1.1.1",
     "stof/doctrine-extensions-bundle": "~1.2.1",
     "open-orchestra/open-orchestra-bbcode-bundle": "self.version",
     "open-orchestra/open-orchestra-display-bundle": "self.version",
