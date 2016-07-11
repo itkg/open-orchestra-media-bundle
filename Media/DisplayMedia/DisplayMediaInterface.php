@@ -32,6 +32,8 @@ interface DisplayMediaInterface
     public function displayPreview(MediaInterface $media);
 
     /**
+     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
+     *
      * @param MediaInterface $media
      * @param string         $format
      * @param string         $style
@@ -39,6 +41,14 @@ interface DisplayMediaInterface
      * @return string
      */
     public function displayMedia(MediaInterface $media, $format, $style = '');
+
+    /**
+     * @param MediaInterface $media
+     * @param array          $options
+     *
+     * @return string
+     */
+    public function renderMedia(MediaInterface $media, array $options);
 
     /**
      * @param MediaInterface $media

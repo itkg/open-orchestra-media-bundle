@@ -5,8 +5,8 @@
         class="{{ class }}"
     {%- endif %}>
     {% if linkUrl is not null %}
-        <a href="{{ url(linkUrl.id) }}">{{ display_media(picture.id, picture.format) }}</a>
+        <a href="{{ url(linkUrl.id) }}">{{ render_media(picture.id, {'format': picture.format}) }}</a>
     {% else %}
-        {{ display_media(picture.id, picture.format) }}
+        {{ render_media(picture.id, {'format': picture.format}) }}
     {% endif %}
 </div>

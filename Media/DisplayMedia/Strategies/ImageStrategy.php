@@ -20,14 +20,19 @@ class ImageStrategy extends AbstractStrategy
     }
 
     /**
+     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
+     *
      * @param MediaInterface $media
      * @param string         $format
      * @param string         $style
      *
-     * @return String
+     * @return string
      */
     public function displayMedia(MediaInterface $media, $format = '', $style = '')
     {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.2.0 and will be removed in 2.0.0.'
+            . 'Use the '.__CLASS__.'::renderMedia method instead.', E_USER_DEPRECATED);
+
         $request = $this->requestStack->getMasterRequest();
 
         return $this->render(
@@ -35,7 +40,33 @@ class ImageStrategy extends AbstractStrategy
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $format),
                 'media_alt' => $media->getAlt($request->getLocale()),
-                'style' => $style,
+                'id' => '',
+                'class' => '',
+                'style' => $style
+            )
+        );
+    }
+
+    /**
+     * @param MediaInterface $media
+     * @param array          $options
+     *
+     * @return string
+     */
+    public function renderMedia(MediaInterface $media, array $options)
+    {
+        $options = $this->validateOptions($options, __METHOD__);
+
+        $request = $this->requestStack->getMasterRequest();
+
+        return $this->render(
+            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:image.html.twig',
+            array(
+                'media_url' => $this->getMediaFormatUrl($media, $options['format']),
+                'media_alt' => $media->getAlt($request->getLocale()),
+                'id' => $options['id'],
+                'class' => $options['class'],
+                'style' => $options['style']
             )
         );
     }
