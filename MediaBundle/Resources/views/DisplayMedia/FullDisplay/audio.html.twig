@@ -1,4 +1,15 @@
-<audio controls style="{{ style }}">
+<audio
+    controls
+    {% if id -%}
+        id="{{ id }}"
+    {%- endif -%}
+    {%- if class -%}
+        class="{{ class }}"
+    {%- endif %}
+    {%- if style -%}
+        style="{{ style }}"
+    {%- endif %}
+>
     <source src="{{ media_url }}" type="{{ media_type }}">
     {{ 'open_orchestra_media.strategy.audio.tag_not_supported'|trans }}
 </audio>

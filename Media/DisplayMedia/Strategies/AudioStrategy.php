@@ -9,7 +9,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
  */
 class AudioStrategy extends AbstractStrategy
 {
-    const MIME_TYPE_FRAGMENT_AUDIO = 'audio';
+    const MEDIA_TYPE = 'audio';
 
     /**
      * @param MediaInterface $media
@@ -18,15 +18,17 @@ class AudioStrategy extends AbstractStrategy
      */
     public function support(MediaInterface $media)
     {
-        return strpos($media->getMimeType(), self::MIME_TYPE_FRAGMENT_AUDIO) === 0;
+        return self::MEDIA_TYPE == $media->getMediaType();
     }
 
     /**
+     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
+     *
      * @param MediaInterface $media
      * @param string         $format
      * @param string         $style
      *
-     * @return String
+     * @return string
      */
     public function displayMedia(MediaInterface $media, $format = '', $style = '')
     {
@@ -35,7 +37,31 @@ class AudioStrategy extends AbstractStrategy
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_type' => $media->getMimeType(),
+                'id' => '',
+                'class' => '',
                 'style' => $style,
+            )
+        );
+    }
+
+    /**
+     * @param MediaInterface $media
+     * @param array          $options
+     *
+     * @return string
+     */
+    public function renderMedia(MediaInterface $media, array $options)
+    {
+        $options = $this->validateOptions($options, __METHOD__);
+
+        return $this->render(
+            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:audio.html.twig',
+            array(
+                'media_url' => $this->getFileUrl($media->getFilesystemName()),
+                'media_type' => $media->getMimeType(),
+                'id' => $options['id'],
+                'class' => $options['class'],
+                'style' => $options['style'],
             )
         );
     }

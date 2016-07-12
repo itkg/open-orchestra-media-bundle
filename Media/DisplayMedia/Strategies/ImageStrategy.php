@@ -9,6 +9,8 @@ use OpenOrchestra\Media\Model\MediaInterface;
  */
 class ImageStrategy extends AbstractStrategy
 {
+    const MEDIA_TYPE = 'image';
+
     /**
      * @param MediaInterface $media
      *
@@ -16,7 +18,7 @@ class ImageStrategy extends AbstractStrategy
      */
     public function support(MediaInterface $media)
     {
-        return strpos($media->getMimeType(), 'image') === 0;
+        return self::MEDIA_TYPE == $media->getMediaType();
     }
 
     /**

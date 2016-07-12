@@ -139,6 +139,20 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
     }
 
     /**
+     * @param array  $options
+     * @param string $optionName
+     * @param string $method
+     *
+     * @throws BadOptionFormatException
+     */
+    protected function checkIfInteger(array $options, $optionName, $method)
+    {
+        if (!is_int($options[$optionName])) {
+            throw new BadOptionFormatException($optionName, 'integer', $method);
+        }
+    }
+
+    /**
      * @param MediaInterface $media
      *
      * @param MediaInterface $media

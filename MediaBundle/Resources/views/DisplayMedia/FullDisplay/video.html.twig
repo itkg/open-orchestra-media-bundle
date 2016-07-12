@@ -1,4 +1,21 @@
-<video width="320" height="240" controls style="{{ style }}">
+<video
+    {% if width -%}
+        width="{{ width }}"
+    {%- endif -%}
+    {% if height -%}
+        height="{{ height }}"
+    {%- endif -%}
+    controls
+    {% if id -%}
+        id="{{ id }}"
+    {%- endif -%}
+    {%- if class -%}
+        class="{{ class }}"
+    {%- endif %}
+    {%- if style -%}
+        style="{{ style }}"
+    {%- endif %}
+>
     <source src="{{ media_url }}" type="{{ media_type }}">
     {{ 'open_orchestra_media.strategy.video.tag_not_supported'|trans }}
 </video>
