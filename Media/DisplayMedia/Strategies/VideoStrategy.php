@@ -46,7 +46,7 @@ class VideoStrategy extends AbstractStrategy
     public function displayMedia(MediaInterface $media, $format = '', $style = '')
     {
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:video.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:video.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_type' => $media->getMimeType(),
@@ -70,7 +70,7 @@ class VideoStrategy extends AbstractStrategy
         $options = $this->validateOptions($options, __METHOD__);
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:video.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:video.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_type' => $media->getMimeType(),

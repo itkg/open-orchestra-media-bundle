@@ -39,7 +39,7 @@ class DefaultStrategyTest extends AbstractStrategyTest
         $this->strategy->displayMedia($this->media);
 
         Phake::verify($this->templating)->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:default.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:default.html.twig',
             array(
                 'media_url' => $url,
                 'media_name' => $image,

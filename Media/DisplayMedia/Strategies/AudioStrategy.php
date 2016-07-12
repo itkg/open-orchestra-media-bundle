@@ -33,7 +33,7 @@ class AudioStrategy extends AbstractStrategy
     public function displayMedia(MediaInterface $media, $format = '', $style = '')
     {
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:audio.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:audio.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_type' => $media->getMimeType(),
@@ -55,7 +55,7 @@ class AudioStrategy extends AbstractStrategy
         $options = $this->validateOptions($options, __METHOD__);
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:audio.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:audio.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_type' => $media->getMimeType(),

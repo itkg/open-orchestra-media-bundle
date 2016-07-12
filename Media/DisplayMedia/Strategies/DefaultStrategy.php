@@ -34,7 +34,7 @@ class DefaultStrategy extends AbstractStrategy
             . 'Use the '.__CLASS__.'::renderMedia method instead.', E_USER_DEPRECATED);
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:default.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:default.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_name' => $media->getName(),
@@ -56,7 +56,7 @@ class DefaultStrategy extends AbstractStrategy
         $options = $this->validateOptions($options, __METHOD__);
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:default.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:default.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_name' => $media->getName(),

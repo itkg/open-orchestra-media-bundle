@@ -39,7 +39,7 @@ class PdfStrategyTest extends AbstractStrategyTest
         $this->strategy->displayMedia($this->media);
 
         Phake::verify($this->templating)->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:pdf.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:pdf.html.twig',
             array(
                 'media_url' => $url,
                 'media_name' => $image,

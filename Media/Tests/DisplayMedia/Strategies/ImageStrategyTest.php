@@ -41,7 +41,7 @@ class ImageStrategyTest extends AbstractStrategyTest
         $this->strategy->displayMedia($this->media);
 
         Phake::verify($this->templating)->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:image.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $url,
                 'media_alt' => $alt,

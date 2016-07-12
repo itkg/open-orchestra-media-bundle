@@ -33,7 +33,7 @@ class PdfStrategy extends AbstractStrategy
     public function displayMedia(MediaInterface $media, $format = '', $style = '')
     {
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:pdf.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:pdf.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_name' => $media->getName(),
@@ -55,7 +55,7 @@ class PdfStrategy extends AbstractStrategy
         $options = $this->validateOptions($options, __METHOD__);
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:pdf.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:pdf.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getFilesystemName()),
                 'media_name' => $media->getName(),

@@ -38,7 +38,7 @@ class ImageStrategy extends AbstractStrategy
         $request = $this->requestStack->getMasterRequest();
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:image.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $format),
                 'media_alt' => $media->getAlt($request->getLocale()),
@@ -62,7 +62,7 @@ class ImageStrategy extends AbstractStrategy
         $request = $this->requestStack->getMasterRequest();
 
         return $this->render(
-            'OpenOrchestraMediaBundle:DisplayMedia/FullDisplay:image.html.twig',
+            'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $options['format']),
                 'media_alt' => $media->getAlt($request->getLocale()),
