@@ -80,7 +80,7 @@ class DisplayMediaManager
      *
      * @return string
      */
-    public function renderMedia(MediaInterface $media, array $options)
+    public function renderMedia(MediaInterface $media, array $options = array())
     {
         /** @var DisplayMediaInterface $strategy */
         foreach ($this->strategies as $strategy) {

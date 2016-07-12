@@ -27,25 +27,33 @@ class ImageStrategyTest extends AbstractStrategyTest
      * @param string $image
      * @param string $url
      * @param string $alt
+     * @param string $id
+     * @param string $class
+     * @param string $style
      *
      * @dataProvider displayImage
      */
-    public function testDisplayMedia($image, $url, $alt)
+    public function testRenderMedia($image, $url, $alt, $id = '', $class = '', $style = '')
     {
-        parent::testDisplayMedia($image, $url, $alt);
-
         Phake::when($this->media)->getFilesystemName()->thenReturn($image);
         Phake::when($this->media)->getAlt(Phake::anyParameters())->thenReturn($alt);
-        $format = 'preview';
 
-        $this->strategy->displayMedia($this->media);
+        parent::testRenderMedia($image, $url, $alt);
+
+        $this->strategy->renderMedia($this->media, array(
+            'id' => $id,
+            'class' => $class,
+            'style' => $style
+        ));
 
         Phake::verify($this->templating)->render(
             'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $url,
                 'media_alt' => $alt,
-                'style' => '',
+                'id' => $id,
+                'class' => $class,
+                'style' => $style
             )
         );
     }
@@ -56,8 +64,8 @@ class ImageStrategyTest extends AbstractStrategyTest
     public function displayImage()
     {
         return array(
-            array('test1.jpg', '//' . $this->pathToFile . '/' . 'test1.jpg', 'test1'),
-            array('test2.png', '//' . $this->pathToFile . '/' . 'test2.png', 'test2'),
+            'withoutOptions' => array('test1.jpg', '//' . $this->pathToFile . '/' . 'test1.jpg', 'test1'),
+            'withOptions' => array('test2.png', '//' . $this->pathToFile . '/' . 'test2.png', 'test2', 'id', 'class', 'style'),
         );
     }
 
@@ -136,20 +144,11 @@ class ImageStrategyTest extends AbstractStrategyTest
     /**
      * @return array
      */
-    public function provideMimeTypes()
+    public function provideMediaTypes()
     {
-        return array(
-            array('image/jpeg', true),
-            array('image/gif', true),
-            array('image/png', true),
-            array('application/pdf', false),
-            array('video/mpeg', false),
-            array('video/quicktime', false),
-            array('text/csv', false),
-            array('text/html', false),
-            array('text/plain', false),
-            array('audio/mpeg', false),
-            array('application/msword', false),
+        return array_merge(
+            parent::provideMediaTypes(),
+            array('image' => array('image', true))
         );
     }
 

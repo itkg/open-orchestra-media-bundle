@@ -26,23 +26,33 @@ class AudioStrategyTest extends AbstractStrategyTest
      * @param string $image
      * @param string $url
      * @param string $alt
+     * @param string $id
+     * @param string $class
+     * @param string $style
      *
      * @dataProvider displayImage
      */
-    public function testDisplayMedia($image, $url, $alt)
+    public function testRenderMedia($image, $url, $alt, $id = '', $class = '', $style = '')
     {
         $mimeType = 'Mime Type';
-        parent::testDisplayMedia($image, $url, $alt);
         Phake::when($this->media)->getMimeType(Phake::anyParameters())->thenReturn($mimeType);
 
-        $this->strategy->displayMedia($this->media);
+        parent::testRenderMedia($image, $url, $alt);
+
+        $this->strategy->renderMedia($this->media, array(
+            'id' => $id,
+            'class' => $class,
+            'style' => $style
+        ));
 
         Phake::verify($this->templating)->render(
             'OpenOrchestraMediaBundle:RenderMedia:audio.html.twig',
             array(
                 'media_url' => $url,
                 'media_type' => $mimeType,
-                'style' => '',
+                'id' => $id,
+                'class' => $class,
+                'style' => $style
             )
         );
     }
@@ -53,8 +63,8 @@ class AudioStrategyTest extends AbstractStrategyTest
     public function displayImage()
     {
         return array(
-            array('test1.mp3', '//' . $this->pathToFile . '/test1.mp3', 'test1'),
-            array('test2.ogg', '//' . $this->pathToFile . '/test2.ogg', 'test2'),
+            'withoutOptions' => array('test1.mp3', '//' . $this->pathToFile . '/test1.mp3', 'test1'),
+            'withOptions' => array('test2.ogg', '//' . $this->pathToFile . '/test2.ogg', 'test2', 'id', 'class', 'style'),
         );
     }
 
@@ -97,14 +107,11 @@ class AudioStrategyTest extends AbstractStrategyTest
     /**
      * @return array
      */
-    public function provideMimeTypes()
+    public function provideMediaTypes()
     {
         return array_merge(
-            parent::provideMimeTypes(),
-            array(
-                array('audio/mpeg', true),
-                array('audio/mp3', true),
-            )
+            parent::provideMediaTypes(),
+            array('audio' => array('audio', true))
         );
     }
 

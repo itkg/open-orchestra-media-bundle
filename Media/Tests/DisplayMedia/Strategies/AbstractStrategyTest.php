@@ -44,7 +44,7 @@ abstract class AbstractStrategyTest extends AbstractBaseTestCase
      *
      * @dataProvider displayImage
      */
-    public function testDisplayMedia($image, $url, $alt)
+    public function testRenderMedia($image, $url, $alt)
     {
         Phake::when($this->media)->getName()->thenReturn($image);
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
@@ -122,14 +122,14 @@ abstract class AbstractStrategyTest extends AbstractBaseTestCase
     abstract public function getMediaFormatUrl();
 
     /**
-     * @param string $mimeType
-     * @param bool $supported
+     * @param string $mediaType
+     * @param bool   $supported
      *
-     * @dataProvider provideMimeTypes
+     * @dataProvider provideMediaTypes
      */
-    public function testSupport($mimeType, $supported)
+    public function testSupport($mediaType, $supported)
     {
-        Phake::when($this->media)->getMimeType()->thenReturn($mimeType);
+        Phake::when($this->media)->getMediaType()->thenReturn($mediaType);
 
         $this->assertSame($supported, $this->strategy->support($this->media));
     }
@@ -137,16 +137,14 @@ abstract class AbstractStrategyTest extends AbstractBaseTestCase
     /**
      * @return array
      */
-    public function provideMimeTypes()
+    public function provideMediaTypes()
     {
         return array(
-            array('image/jpeg', false),
-            array('image/gif', false),
-            array('image/png', false),
-            array('text/csv', false),
-            array('text/html', false),
-            array('text/plain', false),
-            array('application/msword', false),
+            'image' => array('image', false),
+            'audio' => array('audio', false),
+            'video' => array('video', false),
+            'pdf' => array('pdf', false),
+            'default' => array('default', false),
         );
     }
 }

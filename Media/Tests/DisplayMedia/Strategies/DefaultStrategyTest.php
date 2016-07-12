@@ -27,23 +27,32 @@ class DefaultStrategyTest extends AbstractStrategyTest
      * @param string $image
      * @param string $url
      * @param string $alt
+     * @param string $id
+     * @param string $class
+     * @param string $style
      *
      * @dataProvider displayImage
      */
-    public function testDisplayMedia($image, $url, $alt)
+    public function testRenderMedia($image, $url, $alt, $id = '', $class = '', $style = '')
     {
-        parent::testDisplayMedia($image, $url, $alt);
-
         Phake::when($this->media)->getName()->thenReturn($image);
 
-        $this->strategy->displayMedia($this->media);
+        parent::testRenderMedia($image, $url, $alt);
+
+        $this->strategy->renderMedia($this->media, array(
+            'id' => $id,
+            'class' => $class,
+            'style' => $style
+        ));
 
         Phake::verify($this->templating)->render(
             'OpenOrchestraMediaBundle:RenderMedia:default.html.twig',
             array(
                 'media_url' => $url,
                 'media_name' => $image,
-                'style' => '',
+                'id' => $id,
+                'class' => $class,
+                'style' => $style
             )
         );
     }
@@ -54,8 +63,8 @@ class DefaultStrategyTest extends AbstractStrategyTest
     public function displayImage()
     {
         return array(
-            array('test1.txt', '//' . $this->pathToFile . '/' . 'test1.txt', 'test1'),
-            array('test2.txt', '//' . $this->pathToFile . '/' . 'test2.txt', 'test2'),
+            'withoutOptions' => array('test1.txt', '//' . $this->pathToFile . '/' . 'test1.txt', 'test1'),
+            'withOptions' => array('test2.txt', '//' . $this->pathToFile . '/' . 'test2.txt', 'test2', 'test2', 'id', 'class', 'style'),
         );
     }
 
@@ -74,12 +83,14 @@ class DefaultStrategyTest extends AbstractStrategyTest
     /**
      * @return array
      */
-    public function provideMimeTypes()
+    public function provideMediaTypes()
     {
         return array(
-            array('application/pdf', true),
-            array('video/mpeg', true),
-            array('video/quicktime', true),
+            'image' => array('image', true),
+            'audio' => array('audio', true),
+            'video' => array('video', true),
+            'pdf' => array('pdf', true),
+            'default' => array('default', true),
         );
     }
 

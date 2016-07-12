@@ -32,23 +32,38 @@ class VideoStrategyTest extends AbstractStrategyTest
      * @param string $image
      * @param string $url
      * @param string $alt
+     * @param string $id
+     * @param string $class
+     * @param string $style
+     * @param int    $width
+     * @param int    $height
      *
      * @dataProvider displayImage
      */
-    public function testDisplayMedia($image, $url, $alt)
+    public function testRenderMedia($image, $url, $alt, $id = '', $class = '', $style = '', $width = 0, $height = 0)
     {
         $mimeType = 'Mime Type';
-        parent::testDisplayMedia($image, $url, $alt);
+        parent::testRenderMedia($image, $url, $alt);
         Phake::when($this->media)->getMimeType(Phake::anyParameters())->thenReturn($mimeType);
 
-        $this->strategy->displayMedia($this->media);
+        $this->strategy->renderMedia($this->media, array(
+            'id' => $id,
+            'class' => $class,
+            'style' => $style,
+            'width' => $width,
+            'height' => $height
+        ));
 
         Phake::verify($this->templating)->render(
             'OpenOrchestraMediaBundle:RenderMedia:video.html.twig',
             array(
                 'media_url' => $url,
                 'media_type' => $mimeType,
-                'style' => '',
+                'id' => $id,
+                'class' => $class,
+                'style' => $style,
+                'width' => $width,
+                'height' => $height
             )
         );
     }
@@ -59,8 +74,8 @@ class VideoStrategyTest extends AbstractStrategyTest
     public function displayImage()
     {
         return array(
-            array('test1.mp4', '//' . $this->pathToFile . '/' . 'test1.mp4', 'test1'),
-            array('test2.avi', '//' . $this->pathToFile . '/' . 'test2.avi', 'test2'),
+            'withoutOptions' => array('test1.mp4', '//' . $this->pathToFile . '/' . 'test1.mp4', 'test1'),
+            'withOptions' => array('test2.avi', '//' . $this->pathToFile . '/' . 'test2.avi', 'test2', 'id', 'class', 'style', 320, 240),
         );
     }
 
@@ -79,12 +94,11 @@ class VideoStrategyTest extends AbstractStrategyTest
     /**
      * @return array
      */
-    public function provideMimeTypes()
+    public function provideMediaTypes()
     {
-        return array_merge(parent::provideMimeTypes(), array(
-            array('application/pdf', false),
-            array('video/mpeg', true),
-            array('video/quicktime', true),
+        return array_merge(
+            parent::provideMediaTypes(),
+            array('video' => array('video', true)
         ));
     }
 
