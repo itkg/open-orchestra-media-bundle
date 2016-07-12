@@ -32,6 +32,9 @@ class AudioStrategy extends AbstractStrategy
      */
     public function displayMedia(MediaInterface $media, $format = '', $style = '')
     {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.2.0 and will be removed in 2.0.0.'
+            . 'Use the '.__CLASS__.'::renderMedia method instead.', E_USER_DEPRECATED);
+
         return $this->render(
             'OpenOrchestraMediaBundle:RenderMedia:audio.html.twig',
             array(
