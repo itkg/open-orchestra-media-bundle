@@ -18,7 +18,7 @@ class ImageStrategy extends AbstractStrategy
      */
     public function support(MediaInterface $media)
     {
-        return self::MEDIA_TYPE == $media->getMediaType();
+        return self::MEDIA_TYPE === $media->getMediaType();
     }
 
     /**
