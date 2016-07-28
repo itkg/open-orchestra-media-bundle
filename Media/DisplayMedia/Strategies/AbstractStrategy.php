@@ -76,7 +76,7 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
 
         $style = '';
         if (isset($options['style'])) {
-            $format = $options['style'];
+            $style = $options['style'];
         }
 
         return $this->displayMedia($media, $format, $style);
@@ -85,6 +85,8 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
     /**
      * @param array  $options
      * @param string $method     the method requiring the validation
+     *
+     * @return array
      *
      * @throws BadOptionException
      * @throws MissingOptionException
@@ -114,6 +116,8 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
      * @param array  $options
      * @param string $optionName
      * @param mixed  $optionDefaultValue
+     *
+     * @return array
      */
     protected function setOptionIfNotSet(array $options, $optionName, $optionDefaultValue)
     {
@@ -192,7 +196,7 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
     /**
      * Return url to a file stored with the UploadedFileManager
      *
-     * @param string storageKey
+     * @param string $storageKey
      *
      * @return string
      */

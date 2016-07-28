@@ -10,7 +10,11 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class BadOptionFormatException extends HttpException
 {
     /**
-     * @param string $message
+     * BadOptionException constructor.
+     *
+     * @param string $option
+     * @param string $type
+     * @param string $method
      */
     public function __construct($option, $type, $method)
     {
