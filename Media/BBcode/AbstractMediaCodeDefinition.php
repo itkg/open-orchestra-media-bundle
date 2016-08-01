@@ -15,6 +15,8 @@ use Symfony\Component\Templating\EngineInterface;
  */
 abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
 {
+    const TAG_NAME = 'media';
+
     protected $repository;
     protected $displayMediaManager;
     protected $templating;
@@ -27,7 +29,7 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
     public function __construct(
         MediaRepositoryInterface $repository, DisplayMediaManager $displayMediaManager, EngineInterface $templating
     ){
-        parent::__construct('media', '');
+        parent::__construct(self::TAG_NAME, '');
         $this->repository = $repository;
         $this->displayMediaManager = $displayMediaManager;
         $this->templating = $templating;
