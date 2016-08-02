@@ -115,6 +115,11 @@ class Media implements MediaInterface
     protected $alternatives = array();
 
     /**
+     * @ODM\Field(type="hash")
+     */
+    protected $mediaInformations = array();
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -421,6 +426,45 @@ class Media implements MediaInterface
     public function removeTitle(TranslatedValueInterface $title)
     {
         $this->titles->removeElement($title);
+    }
+
+    /**
+     * @return array
+     */
+    public function getMediaInformations()
+    {
+        return $this->mediaInformations;
+    }
+
+    /**
+     * @param mixed $mediaInformations
+     */
+    public function setMediaInformations($mediaInformations)
+    {
+        $this->mediaInformations = $mediaInformations;
+    }
+
+    /**
+     * @param string $informationName
+     * @param string $value
+     */
+    public function addMediaInformation($informationName, $value)
+    {
+        $this->mediaInformations[$informationName] = $value;
+    }
+
+    /**
+     * @param string $informationName
+     *
+     * @return string|null
+     */
+    public function getMediaInformation($informationName)
+    {
+        if (isset($this->mediaInformations[$informationName])) {
+            return $this->mediaInformations[$informationName];
+        }
+
+        return null;
     }
 
     /**

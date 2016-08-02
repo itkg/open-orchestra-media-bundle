@@ -198,4 +198,27 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
      * @param TranslatedValueInterface $title
      */
     public function removeTitle(TranslatedValueInterface $title);
+
+    /**
+     * @return array
+     */
+    public function getMediaInformations();
+
+    /**
+     * @param array $mediaInformations
+     */
+    public function setMediaInformations($mediaInformations);
+
+    /**
+     * @param string $informationName
+     * @param string $value
+     */
+    public function addMediaInformation($informationName, $value);
+
+    /**
+     * @param string $informationName
+     *
+     * @return string|null
+     */
+    public function getMediaInformation($informationName);
 }
