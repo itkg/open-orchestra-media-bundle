@@ -16,6 +16,10 @@ use OpenOrchestra\Media\Model\FolderInterface;
  *   collection="folder",
  *   repositoryClass="OpenOrchestra\MediaModelBundle\Repository\FolderRepository"
  * )
+ *
+ * @ODM\Indexes({
+ *  @ODM\Index(keys={"parent"="asc", "siteId"="asc"}),
+ * })
  * @ODM\InheritanceType("SINGLE_COLLECTION")
  * @ODM\DiscriminatorField("type")
  * @ODM\DiscriminatorMap({"media_folder"="MediaFolder"})
