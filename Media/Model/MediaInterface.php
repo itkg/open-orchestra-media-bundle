@@ -6,11 +6,12 @@ use OpenOrchestra\ModelInterface\Model\KeywordableInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use OpenOrchestra\ModelInterface\Model\BlameableInterface;
 use OpenOrchestra\ModelInterface\Model\TimestampableInterface;
+use OpenOrchestra\ModelInterface\Model\UseTrackableInterface;
 
 /**
  * Interface MediaInterface
  */
-interface MediaInterface extends TimestampableInterface, BlameableInterface, KeywordableInterface
+interface MediaInterface extends TimestampableInterface, BlameableInterface, KeywordableInterface, UseTrackableInterface
 {
     const MEDIA_ORIGINAL = 'original';
 
@@ -142,21 +143,6 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
      * @param array $titles
      */
     public function setTitles(array $titles);
-
-    /**
-     * @param string $reference
-     */
-    public function addUsageReference($reference);
-
-    /**
-     * @param string $reference
-     */
-    public function removeUsageReference($reference);
-
-    /**
-     * @return array
-     */
-    public function getUsageReference();
 
     /**
      * @param string $formatName

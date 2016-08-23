@@ -8,6 +8,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 use OpenOrchestra\Media\Repository\MediaRepositoryInterface;
 use OpenOrchestra\ModelBundle\Repository\RepositoryTrait\KeywordableTrait;
 use OpenOrchestra\ModelInterface\Repository\RepositoryTrait\KeywordableTraitInterface;
+use OpenOrchestra\ModelInterface\Model\UseTrackableInterface;
 
 /**
  * Class MediaRepository
@@ -46,7 +47,7 @@ class MediaRepository extends DocumentRepository implements MediaRepositoryInter
         return $qb->getQuery()->execute();
     }
 
-/**
+    /**
      * @param string $keywords
      *
      * @return array
@@ -70,17 +71,29 @@ class MediaRepository extends DocumentRepository implements MediaRepositoryInter
     }
 
     /**
-     * Return medias declaring $pattern as usageReference
+     * @param string $nodeId
      *
-     * @param string $pattern
-     *
-     * @return MediaInterface
+     * @return array
      */
-    public function findByUsagePattern($pattern)
+    public function findUsedInNode($nodeId)
     {
         $qb = $this->createQueryBuilder();
 
-        $qb->field('usageReference')->in(array(new \MongoRegex('/^' . preg_quote($pattern) . '/')));
+        $qb->field('useReferences.' . UseTrackableInterface::KEY_NODE . '.' . $nodeId)->exists('true');
+
+        return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @param string $contentId
+     *
+     * @return array
+     */
+    public function findUsedInContent($contentId)
+    {
+        $qb = $this->createQueryBuilder();
+
+        $qb->field('useReferences.' . UseTrackableInterface::KEY_CONTENT . '.' . $contentId)->exists('true');
 
         return $qb->getQuery()->execute();
     }

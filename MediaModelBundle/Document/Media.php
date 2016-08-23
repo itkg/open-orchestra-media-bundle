@@ -10,6 +10,7 @@ use OpenOrchestra\Media\Model\MediaFolderInterface;
 use OpenOrchestra\Media\Model\MediaInterface;
 use OpenOrchestra\MongoTrait\Keywordable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use OpenOrchestra\MongoTrait\UseTrackable;
 
 /**
  * Class Media
@@ -24,6 +25,7 @@ class Media implements MediaInterface
     use BlameableDocument;
     use TimestampableDocument;
     use Keywordable;
+    use UseTrackable;
 
     /**
      * @var string $id
@@ -102,11 +104,6 @@ class Media implements MediaInterface
      * @ODM\Field(type="string")
      */
     protected $comment;
-
-    /**
-     * @ODM\Field(type="collection")
-     */
-    protected $usageReference = array();
 
     /**
      * @ODM\Field(type="hash")
@@ -387,36 +384,6 @@ class Media implements MediaInterface
     }
 
     /**
-     * @param string $reference
-     */
-    public function addUsageReference($reference)
-    {
-        if (!in_array($reference, $this->usageReference)) {
-            $this->usageReference[] = $reference;
-        }
-    }
-
-    /**
-     * @param string $reference
-     */
-    public function removeUsageReference($reference)
-    {
-        foreach ($this->usageReference as $key => $usageReference) {
-            if ($usageReference == $reference) {
-                unset($this->usageReference[$key]);
-            }
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getUsageReference()
-    {
-        return $this->usageReference;
-    }
-
-    /**
      * @param string $formatName
      * @param string $alternativeName
      */
@@ -462,7 +429,7 @@ class Media implements MediaInterface
      */
     public function isDeletable()
     {
-        return !(bool) count($this->usageReference);
+        return !(bool) count($this->useReferences);
     }
 
     /**

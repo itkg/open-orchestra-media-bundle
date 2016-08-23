@@ -47,11 +47,16 @@ interface MediaRepositoryInterface
     public function findOneByName($name);
 
     /**
-     * Return medias declaring $pattern as usageReference
+     * @param string $nodeId
      *
-     * @param string $pattern
-     *
-     * @return MediaInterface
+     * @return array
      */
-    public function findByUsagePattern($pattern);
+    public function findUsedInNode($nodeId);
+
+    /**
+     * @param string $contentId
+     *
+     * @return array
+     */
+    public function findUsedInContent($contentId);
 }
