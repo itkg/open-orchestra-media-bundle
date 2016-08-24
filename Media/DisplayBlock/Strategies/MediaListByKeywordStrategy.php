@@ -44,9 +44,9 @@ class MediaListByKeywordStrategy extends AbstractStrategy
     }
 
     /**
-     * Indicate if the block is public or private
+     * @param ReadBlockInterface $block
      *
-     * @return boolean
+     * @return bool
      */
     public function isPublic(ReadBlockInterface $block)
     {
@@ -72,18 +72,6 @@ class MediaListByKeywordStrategy extends AbstractStrategy
                 'medias' => $medias
             )
         );
-    }
-
-    /**
-     * Get medias to display
-     *
-     * @param array $keywords
-     *
-     * @return array
-     */
-    protected function getMediasByKeywords($keywords)
-    {
-        return $this->mediaRepository->findByKeywords($keywords);
     }
 
     /**
@@ -116,5 +104,21 @@ class MediaListByKeywordStrategy extends AbstractStrategy
     public function getName()
     {
         return 'media_list_by_keyword';
+    }
+
+    /**
+     * Get medias to display
+     *
+     * @param array|null $keywords
+     *
+     * @return array
+     */
+    protected function getMediasByKeywords($keywords)
+    {
+        if (null !== $keywords) {
+            return $this->mediaRepository->findByKeywords($keywords);
+        }
+
+        return array();
     }
 }
