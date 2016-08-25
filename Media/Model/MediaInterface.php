@@ -13,6 +13,7 @@ use OpenOrchestra\ModelInterface\Model\UseTrackableInterface;
  */
 interface MediaInterface extends TimestampableInterface, BlameableInterface, KeywordableInterface, UseTrackableInterface
 {
+    const ENTITY_TYPE = 'media';
     const MEDIA_ORIGINAL = 'original';
 
     /**

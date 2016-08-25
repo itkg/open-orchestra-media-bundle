@@ -45,18 +45,4 @@ interface MediaRepositoryInterface
      * @return MediaInterface
      */
     public function findOneByName($name);
-
-    /**
-     * @param string $nodeId
-     *
-     * @return array
-     */
-    public function findUsedInNode($nodeId);
-
-    /**
-     * @param string $contentId
-     *
-     * @return array
-     */
-    public function findUsedInContent($contentId);
 }
