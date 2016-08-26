@@ -425,14 +425,6 @@ class Media implements MediaInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isDeletable()
-    {
-        return !(bool) count($this->useReferences);
-    }
-
-    /**
      * @return array
      */
     public function getMediaInformations()

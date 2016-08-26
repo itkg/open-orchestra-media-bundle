@@ -169,11 +169,6 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
     public function getAlternative($formatName);
 
     /**
-     * @return bool
-     */
-    public function isDeletable();
-
-    /**
      * @param string $language
      * @param string $alt
      */
