@@ -8,7 +8,6 @@ use Gedmo\Blameable\Traits\BlameableDocument;
 use Gedmo\Timestampable\Traits\TimestampableDocument;
 use OpenOrchestra\Media\Model\MediaFolderInterface;
 use OpenOrchestra\Media\Model\MediaInterface;
-use OpenOrchestra\ModelInterface\Model\TranslatedValueInterface;
 use OpenOrchestra\MongoTrait\Keywordable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -81,12 +80,12 @@ class Media implements MediaInterface
     protected $thumbnail;
 
     /**
-     * @ODM\EmbedMany(targetDocument="OpenOrchestra\ModelInterface\Model\TranslatedValueInterface")
+     * @ODM\Field(type="hash")
      */
     protected $titles;
 
     /**
-     * @ODM\EmbedMany(targetDocument="OpenOrchestra\ModelInterface\Model\TranslatedValueInterface")
+     * @ODM\Field(type="hash")
      */
     protected $alts;
 
@@ -125,8 +124,8 @@ class Media implements MediaInterface
     public function __construct()
     {
         $this->keywords = new ArrayCollection();
-        $this->titles = new ArrayCollection();
-        $this->alts = new ArrayCollection();
+        $this->titles = array();
+        $this->alts = array();
     }
 
     /**
@@ -233,7 +232,7 @@ class Media implements MediaInterface
         $this->mimeType = $mimeType;
     }
 
-/**
+    /**
      * @return string
      */
     public function getThumbnail()
@@ -250,7 +249,17 @@ class Media implements MediaInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @param array $alts
+     */
+    public function setAlts(array $alts)
+    {
+        foreach ($alts as $language => $alt) {
+            $this->addTitle($language, $alt);
+        }
+    }
+
+    /**
+     * @return array
      */
     public function getAlts()
     {
@@ -262,9 +271,34 @@ class Media implements MediaInterface
      *
      * @return string
      */
-    public function getAlt($language = 'en')
+    public function getAlt($language)
     {
-        return $this->getChosenLanguage($this->alts, $language);
+        if (isset($this->alts[$language])) {
+            return $this->alts[$language];
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $language
+     * @param string $alt
+     */
+    public function addAlt($language, $alt)
+    {
+        if (is_string($language) && is_string($alt)) {
+            $this->alts[$language] = $alt;
+        }
+    }
+
+    /**
+     * @param string $language
+     */
+    public function removeAlt($language)
+    {
+        if (is_string($language) && isset($this->alts[$language])) {
+            unset($this->alts[$language]);
+        }
     }
 
     /**
@@ -300,7 +334,17 @@ class Media implements MediaInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @param array $titles
+     */
+    public function setTitles(array $titles)
+    {
+        foreach ($titles as $language => $title) {
+            $this->addTitle($language, $title);
+        }
+    }
+
+    /**
+     * @return array
      */
     public function getTitles()
     {
@@ -312,9 +356,34 @@ class Media implements MediaInterface
      *
      * @return string
      */
-    public function getTitle($language = 'en')
+    public function getTitle($language)
     {
-        return $this->getChosenLanguage($this->titles, $language);
+        if (isset($this->titles[$language])) {
+            return $this->titles[$language];
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $language
+     * @param string $title
+     */
+    public function addTitle($language, $title)
+    {
+        if (is_string($language) && is_string($title)) {
+            $this->titles[$language] = $title;
+        }
+    }
+
+    /**
+     * @param string $language
+     */
+    public function removeTitle($language)
+    {
+        if (is_string($language) && isset($this->titles[$language])) {
+            unset($this->titles[$language]);
+        }
     }
 
     /**
@@ -397,38 +466,6 @@ class Media implements MediaInterface
     }
 
     /**
-     * @param TranslatedValueInterface $alt
-     */
-    public function addAlt(TranslatedValueInterface $alt)
-    {
-        $this->alts->add($alt);
-    }
-
-    /**
-     * @param TranslatedValueInterface $alt
-     */
-    public function removeAlt(TranslatedValueInterface $alt)
-    {
-        $this->alts->removeElement($alt);
-    }
-
-    /**
-     * @param TranslatedValueInterface $title
-     */
-    public function addTitle(TranslatedValueInterface $title)
-    {
-        $this->titles->add($title);
-    }
-
-    /**
-     * @param TranslatedValueInterface $title
-     */
-    public function removeTitle(TranslatedValueInterface $title)
-    {
-        $this->titles->removeElement($title);
-    }
-
-    /**
      * @return array
      */
     public function getMediaInformations()
@@ -465,32 +502,5 @@ class Media implements MediaInterface
         }
 
         return null;
-    }
-
-    /**
-     * @return array
-     */
-    public function getTranslatedProperties()
-    {
-        return array('getTitles', 'getAlts');
-    }
-
-    /**
-     * @param ArrayCollection $mixed
-     * @param string          $language
-     *
-     * @return string
-     */
-    protected function getChosenLanguage($mixed, $language)
-    {
-        $choosenLanguage = $mixed->filter(function(TranslatedValueInterface $translatedValue) use ($language) {
-            return $language == $translatedValue->getLanguage();
-        });
-
-        if ($choosenLanguage->isEmpty()) {
-            return '';
-        }
-
-        return $choosenLanguage->first()->getValue();
     }
 }
