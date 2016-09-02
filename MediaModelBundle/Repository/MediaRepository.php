@@ -8,13 +8,12 @@ use OpenOrchestra\Media\Model\MediaInterface;
 use OpenOrchestra\Media\Repository\MediaRepositoryInterface;
 use OpenOrchestra\ModelBundle\Repository\RepositoryTrait\KeywordableTrait;
 use OpenOrchestra\ModelInterface\Repository\RepositoryTrait\KeywordableTraitInterface;
-use OpenOrchestra\ModelInterface\Repository\RepositoryTrait\UseTrackableTraitInterface;
 use OpenOrchestra\ModelBundle\Repository\RepositoryTrait\UseTrackableTrait;
 
 /**
  * Class MediaRepository
  */
-class MediaRepository extends DocumentRepository implements MediaRepositoryInterface, KeywordableTraitInterface, UseTrackableTraitInterface
+class MediaRepository extends DocumentRepository implements MediaRepositoryInterface, KeywordableTraitInterface
 {
     use KeywordableTrait;
     use UseTrackableTrait;
