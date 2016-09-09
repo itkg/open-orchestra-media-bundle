@@ -1,0 +1,5 @@
+open_orchestra_media_model:
+    field:
+      file:
+        mime_types: Format non autorisé
+        max_size: Le fichier est trop lourd (%max_size% octets maximun)

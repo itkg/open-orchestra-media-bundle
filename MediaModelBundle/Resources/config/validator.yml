@@ -1,0 +1,10 @@
+parameters:
+     open_orchestra_media_model.validator.media_file.class: OpenOrchestra\MediaModelBundle\Validator\Constraints\MediaFileValidator
+
+services:
+    open_orchestra_media_model.validator.media_file:
+        class: '%open_orchestra_media_model.validator.media_file.class%'
+        arguments:
+            - '%open_orchestra_media.allowed_mime_type%'
+        tags:
+            - { name: validator.constraint_validator, alias: media_file}

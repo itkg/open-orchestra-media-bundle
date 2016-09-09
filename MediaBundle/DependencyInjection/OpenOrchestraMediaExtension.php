@@ -27,6 +27,7 @@ class OpenOrchestraMediaExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('open_orchestra_media.media_domain', $config['media_domain']);
+        $container->setParameter('open_orchestra_media.allowed_mime_type', $config['allowed_mime_type']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('bbcode.yml');

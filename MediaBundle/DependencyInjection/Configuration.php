@@ -22,6 +22,25 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->scalarNode('media_domain')->defaultValue('')->end()
+            ->integerNode('upload_max_size')->defaultValue('')->end()
+            ->arrayNode('allowed_mime_type')
+            ->info('List of allowed mime type')
+            ->prototype('scalar')->end()
+            ->defaultValue( array(
+                'image/jpeg',
+                'image/png',
+                'image/gif',
+                'audio/mpeg',
+                'video/mpeg',
+                'video/mp4',
+                'video/quicktime',
+                'video/x-ms-wmv',
+                'video/x-msvideo',
+                'video/x-flv',
+                'video/webm',
+                'application/pdf',
+            ))
+            ->end()
         ->end();
 
         return $treeBuilder;

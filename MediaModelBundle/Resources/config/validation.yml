@@ -2,3 +2,8 @@ OpenOrchestra\MediaModelBundle\Document\Folder:
     properties:
         name:
             - NotBlank: ~
+
+OpenOrchestra\MediaModelBundle\Document\Media:
+    properties:
+        file:
+            - OpenOrchestra\MediaModelBundle\Validator\Constraints\MediaFile: ~
