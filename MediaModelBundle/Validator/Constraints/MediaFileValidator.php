@@ -26,8 +26,6 @@ class MediaFileValidator extends ConstraintValidator
      *
      * @param UploadedFile   $file      The value that should be validated
      * @param Constraint     $constraint The constraint for the validation
-     *
-     * @api
      */
     public function validate($file, Constraint $constraint)
     {

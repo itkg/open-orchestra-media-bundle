@@ -22,7 +22,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->scalarNode('media_domain')->defaultValue('')->end()
-            ->integerNode('upload_max_size')->defaultValue('')->end()
             ->arrayNode('allowed_mime_type')
             ->info('List of allowed mime type')
             ->prototype('scalar')->end()
