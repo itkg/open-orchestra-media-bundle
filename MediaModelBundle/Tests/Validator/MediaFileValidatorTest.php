@@ -6,8 +6,6 @@ use OpenOrchestra\BaseBundle\Tests\AbstractTest\AbstractBaseTestCase;
 use OpenOrchestra\MediaModelBundle\Validator\Constraints\MediaFile;
 use OpenOrchestra\MediaModelBundle\Validator\Constraints\MediaFileValidator;
 use Phake;
-use OpenOrchestra\ModelBundle\Validator\Constraints\CheckRoutePattern;
-use OpenOrchestra\ModelBundle\Validator\Constraints\CheckRoutePatternValidator;
 
 /**
  * Class CheckRoutePatternValidatorTest
