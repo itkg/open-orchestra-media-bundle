@@ -6,4 +6,4 @@ OpenOrchestra\MediaModelBundle\Document\Folder:
 OpenOrchestra\MediaModelBundle\Document\Media:
     properties:
         file:
-            - OpenOrchestra\MediaModelBundle\Validator\Constraints\MediaFile: ~
+            - OpenOrchestra\MediaModelBundle\Validator\Constraints\MediaFile:  { groups: [upload] }
