@@ -56,7 +56,7 @@ class DisplayMediaExtensionTest extends AbstractBaseTestCase
      */
     public function testFunctions()
     {
-        $this->assertCount(5, $this->extension->getFunctions());
+        $this->assertCount(4, $this->extension->getFunctions());
     }
 
     /**
@@ -81,22 +81,6 @@ class DisplayMediaExtensionTest extends AbstractBaseTestCase
         return array(
             array('mediaId')
         );
-    }
-
-    /**
-     * Test mediaMymType
-     *
-     * @param string $mediaId
-     *
-     * @dataProvider provideMediaId
-     */
-    public function testDisplayMediaNull($mediaId)
-    {
-        Phake::when($this->mediaRepository)->find(Phake::anyParameters())->thenReturn(null);
-
-        $this->assertSame('', $this->extension->displayMedia($mediaId));
-
-        Phake::verify($this->displayMediaManager, Phake::never())->displayMedia($this->media);
     }
 
     /**

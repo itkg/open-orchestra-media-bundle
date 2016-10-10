@@ -57,32 +57,6 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
     }
 
     /**
-     * @deprecated renderMedia is deprecated in AbstractStrategy since version 1.2.0 and will be removed in 2.0.0. Implement it in the strategies
-     *
-     * @param MediaInterface $media
-     * @param array          $options
-     *
-     * @return string
-     */
-    public function renderMedia(MediaInterface $media, array $options)
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated in AbstractStrategy since version 1.2.0 and will be removed in 2.0.0.'
-            . ' Implement it in the strategies instead.', E_USER_DEPRECATED);
-
-        $format = '';
-        if (isset($options['format'])) {
-            $format = $options['format'];
-        }
-
-        $style = '';
-        if (isset($options['style'])) {
-            $style = $options['style'];
-        }
-
-        return $this->displayMedia($media, $format, $style);
-    }
-
-    /**
      * @param array  $options
      * @param string $method     the method requiring the validation
      *

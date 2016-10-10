@@ -32,17 +32,6 @@ interface DisplayMediaInterface
     public function displayPreview(MediaInterface $media);
 
     /**
-     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
-     *
-     * @param MediaInterface $media
-     * @param string         $format
-     * @param string         $style
-     *
-     * @return string
-     */
-    public function displayMedia(MediaInterface $media, $format, $style = '');
-
-    /**
      * @param MediaInterface $media
      * @param array          $options
      *

@@ -22,34 +22,6 @@ class ImageStrategy extends AbstractStrategy
     }
 
     /**
-     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
-     *
-     * @param MediaInterface $media
-     * @param string         $format
-     * @param string         $style
-     *
-     * @return string
-     */
-    public function displayMedia(MediaInterface $media, $format = '', $style = '')
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.2.0 and will be removed in 2.0.0.'
-            . 'Use the '.__CLASS__.'::renderMedia method instead.', E_USER_DEPRECATED);
-
-        $request = $this->requestStack->getMasterRequest();
-
-        return $this->render(
-            'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
-            array(
-                'media_url' => $this->getMediaFormatUrl($media, $format),
-                'media_alt' => $media->getAlt($request->getLocale()),
-                'id' => '',
-                'class' => '',
-                'style' => $style
-            )
-        );
-    }
-
-    /**
      * @param MediaInterface $media
      * @param array          $options
      *

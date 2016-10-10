@@ -58,6 +58,8 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
     /**
      * @param BBcodeElementNodeInterface $el
      * @param bool                       $preview
+     *
+     * @return string
      */
     protected function generateHtml(BBcodeElementNodeInterface $el, $preview = false)
     {
@@ -76,7 +78,7 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
                 return $this->displayMediaManager->displayMediaForWysiwyg($media, $this->getFormat($el), $this->getStyle($el));
             } else {
 
-                return $this->displayMediaManager->displayMedia($media, $this->getFormat($el), $this->getStyle($el));
+                return $this->displayMediaManager->renderMedia($media, array('format' => $this->getFormat($el), 'style' => $this->getStyle($el)));
             }
         }
 

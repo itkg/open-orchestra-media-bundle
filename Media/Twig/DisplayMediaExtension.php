@@ -38,10 +38,6 @@ class DisplayMediaExtension extends \Twig_Extension
     {
         return array(
             // Render a media or an alternative, using the display strategies
-            // @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
-            new \Twig_SimpleFunction('display_media', array($this, 'displayMedia'), array('is_safe' => array('html'))),
-
-            // Render a media or an alternative, using the display strategies
             new \Twig_SimpleFunction(
                 'render_media',
                 array($this, 'renderMedia'),
@@ -57,28 +53,6 @@ class DisplayMediaExtension extends \Twig_Extension
             // Get the alt of a media
             new \Twig_SimpleFunction('get_media_alt', array($this, 'getMediaAlt')),
         );
-    }
-
-    /**
-     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
-     *
-     * @param string $mediaId
-     * @param string $format
-     *
-     * @return string
-     */
-    public function displayMedia($mediaId, $format = '')
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.2.0 and will be removed in 2.0.0.'
-            . 'Use the '.__CLASS__.'::renderMedia method instead.', E_USER_DEPRECATED);
-
-        $media = $this->getMedia($mediaId);
-
-        if ($media) {
-            return $this->displayMediaManager->displayMedia($media, $format);
-        }
-
-        return '';
     }
 
     /**

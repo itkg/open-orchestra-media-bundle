@@ -51,30 +51,6 @@ class DisplayMediaManager
     }
 
     /**
-     * @deprecated displayMedia is deprecated since version 1.2.0 and will be removed in 2.0.0 use renderMedia
-     *
-     * @param MediaInterface $media
-     * @param string         $format
-     * @param string         $style
-     *
-     * @return string
-     */
-    public function displayMedia(MediaInterface $media, $format = '', $style = '')
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.2.0 and will be removed in 2.0.0.'
-            . 'Use the '.__CLASS__.'::renderMedia method instead.', E_USER_DEPRECATED);
-
-        /** @var DisplayMediaInterface $strategy */
-        foreach ($this->strategies as $strategy) {
-            if ($strategy->support($media)) {
-                return $strategy->displayMedia($media, $format, $style);
-            }
-        }
-
-        return $this->defaultStrategy->displayMedia($media, $format, $style);
-    }
-
-    /**
      * @param MediaInterface $media
      * @param array          $options
      *

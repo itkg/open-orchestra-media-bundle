@@ -103,7 +103,7 @@ abstract class AbstractMediaCodeDefinitionTest extends AbstractBaseTestCase
     {
         $html = $this->definition->getHtml($this->BBcodeElementNode);
 
-        Phake::verify($this->displayManager)->displayMedia($this->media, $expectedFormat, '');
+        Phake::verify($this->displayManager)->renderMedia($this->media, array('format' => $expectedFormat, 'style' => ''));
     }
 
     /**
