@@ -46,7 +46,7 @@ class SlideshowStrategy extends AbstractStrategy
     public function show(ReadBlockInterface $block)
     {
         $parameters = array(
-            'slideshow_class' => $block->getClass(),
+            'slideshow_class' => $block->getStyle(),
             'slideshow_id' => $block->getId(),
             'width' => $block->getAttribute('width'),
             'height' => $block->getAttribute('height'),

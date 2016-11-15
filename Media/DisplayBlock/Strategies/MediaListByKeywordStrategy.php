@@ -68,7 +68,7 @@ class MediaListByKeywordStrategy extends AbstractStrategy
             $this->template,
             array(
                 'id' => $block->getId(),
-                'class' => $block->getClass(),
+                'class' => $block->getStyle(),
                 'medias' => $medias
             )
         );

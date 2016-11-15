@@ -61,7 +61,7 @@ class DisplayMediaStrategy extends AbstractStrategy
             'picture' => $block->getAttribute('picture'),
             'linkUrl' => $linkUrl,
             'id' => $block->getId(),
-            'class' => $block->getClass()
+            'class' => $block->getStyle(),
         );
 
         return $this->render($this->template, $parameters);

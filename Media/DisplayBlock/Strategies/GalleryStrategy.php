@@ -46,7 +46,7 @@ class GalleryStrategy extends AbstractStrategy
 
     /**
      * Indicate if the block is public or private
-     * 
+     *
      * @return boolean
      */
     public function isPublic(ReadBlockInterface $block)
@@ -73,7 +73,7 @@ class GalleryStrategy extends AbstractStrategy
         return $this->render(
             $this->template,
             array(
-                'galleryClass' => $block->getClass(),
+                'galleryClass' => $block->getStyle(),
                 'id' => $block->getId(),
                 'pictures' => $this->filterMedias($block->getAttribute('pictures'), $currentPage, $block->getAttribute('itemNumber')),
                 'numberOfColumns' => $block->getAttribute('columnNumber'),
@@ -90,7 +90,7 @@ class GalleryStrategy extends AbstractStrategy
     /**
      * Generate an indexed array containing query parameters
      * formatted as (paramName => paramValue)
-     * 
+     *
      * @return array
      */
     protected function getParameters()
@@ -103,11 +103,11 @@ class GalleryStrategy extends AbstractStrategy
 
     /**
      * Filter medias to display
-     * 
+     *
      * @param array $medias
      * @param int   $currentPage
      * @param int   $itemCount
-     * 
+     *
      * @return array
      */
     protected function filterMedias($medias, $currentPage, $itemCount)
@@ -130,9 +130,9 @@ class GalleryStrategy extends AbstractStrategy
 
     /**
      * Return block specific cache tags
-     * 
+     *
      * @param ReadBlockInterface $block
-     * 
+     *
      * @return array
      */
     public function getCacheTags(ReadBlockInterface $block)
