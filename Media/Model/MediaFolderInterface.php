@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\Collection;
  */
 interface MediaFolderInterface extends FolderInterface
 {
+    const ENTITY_TYPE = 'media_folder';
+
     /**
      * @return Collection
      */

@@ -63,4 +63,9 @@ interface FolderInterface extends TimestampableInterface, BlameableInterface
      * @param string $siteId
      */
     public function setSiteId($siteId);
+
+    /**
+     * @return string
+     */
+    public function getPath();
 }
