@@ -24,6 +24,7 @@ class OpenOrchestraMediaModelExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('validator.yml');
+        $loader->load('listener.yml');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -33,6 +34,11 @@ class OpenOrchestraMediaModelExtension extends Extension
                 $container->setParameter('open_orchestra_media.document.' . $class . '.class', $content['class']);
                 $definition = new Definition($content['repository'], array($content['class']));
                 $definition->setFactory(array(new Reference('doctrine.odm.mongodb.document_manager'), 'getRepository'));
+                if ('media_folder' == $class) {
+                    $definition->addMethodCall('setAggregationQueryBuilder', array(
+                        new Reference('doctrine_mongodb.odm.default_aggregation_query')
+                    ));
+                }
                 $container->setDefinition('open_orchestra_media.repository.' . $class, $definition);
             }
         }

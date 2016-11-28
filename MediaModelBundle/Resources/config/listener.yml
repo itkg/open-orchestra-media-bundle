@@ -1,0 +1,12 @@
+parameters:
+    open_orchestra_media_model.doctrine_listener.generate_path.class: OpenOrchestra\MediaModelBundle\EventListener\GeneratePathListener
+
+services:
+    open_orchestra_media_model.doctrine_listener.generate_path:
+        class: '%open_orchestra_media_model.doctrine_listener.generate_path.class%'
+        calls:
+            - [setContainer, ['@service_container']]
+        tags:
+            -  { name: doctrine_mongodb.odm.event_listener, event: prePersist }
+            -  { name: doctrine_mongodb.odm.event_listener, event: preUpdate }
+            -  { name: doctrine_mongodb.odm.event_listener, event: postFlush }

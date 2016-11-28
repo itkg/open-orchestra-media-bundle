@@ -40,6 +40,20 @@ interface FolderInterface extends TimestampableInterface, BlameableInterface
     public function setParent(FolderInterface $parent);
 
     /**
+     * Set path
+     *
+     * @param string $path
+     */
+    public function setPath($path);
+
+    /**
+     * Get path
+     *
+     * @return string $path
+     */
+    public function getPath();
+
+    /**
      * @return Collection
      */
     public function getSubFolders();

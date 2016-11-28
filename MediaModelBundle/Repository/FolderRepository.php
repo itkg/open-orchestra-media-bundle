@@ -3,13 +3,14 @@
 namespace OpenOrchestra\MediaModelBundle\Repository;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ODM\MongoDB\DocumentRepository;
 use OpenOrchestra\Media\Repository\FolderRepositoryInterface;
+use OpenOrchestra\ModelInterface\Repository\FieldAutoGenerableRepositoryInterface;
+use OpenOrchestra\Repository\AbstractAggregateRepository;
 
 /**
  * Class FolderRepository
  */
-class FolderRepository extends DocumentRepository implements FolderRepositoryInterface
+class FolderRepository extends AbstractAggregateRepository implements FolderRepositoryInterface, FieldAutoGenerableRepositoryInterface
 {
     /**
      * @param string $siteId
@@ -55,5 +56,26 @@ class FolderRepository extends DocumentRepository implements FolderRepositoryInt
         $qb->field('siteId')->equals($siteId);
 
         return $qb->getQuery()->execute();
+    }
+
+    public function findSubTreeByPath($path)
+    {
+        $qa = $this->createAggregationQuery();
+        $qa->match(array('path' => new \MongoRegex('/'.preg_quote($path).'.+/')));
+
+        return $this->hydrateAggregateQuery($qa);
+    }
+
+    /**
+     * @param string $nodeId
+     *
+     * @return boolean
+     */
+    public function testUniquenessInContext($folderId)
+    {
+        $qa = $this->createAggregationQuery();
+        $qa->match(array('folderId' => $folderId));
+
+        return $this->countDocumentAggregateQuery($qa) > 0;
     }
 }
