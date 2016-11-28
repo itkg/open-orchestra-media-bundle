@@ -179,12 +179,4 @@ abstract class Folder implements FolderInterface
     {
         $this->siteId = $siteId;
     }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return '';
-    }
 }
