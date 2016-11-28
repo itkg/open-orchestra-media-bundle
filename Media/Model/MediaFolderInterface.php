@@ -25,4 +25,18 @@ interface MediaFolderInterface extends FolderInterface
      * @param MediaInterface $media
      */
     public function removeMedia(MediaInterface $media);
+
+    /**
+     * Set folderId
+     *
+     * @param string $folderId
+     */
+    public function setFolderId($folderId);
+
+    /**
+     * Get fodlereId
+     *
+     * @return string
+     */
+    public function getFolderId();
 }

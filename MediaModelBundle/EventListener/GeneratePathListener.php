@@ -57,7 +57,6 @@ class GeneratePathListener implements ContainerAwareInterface
         if ($document instanceof FolderInterface) {
             $folderRepository = $this->container->get('open_orchestra_media.repository.media_folder');
             $folderId = $document->getFolderId();
-            $siteId = $document->getSiteId();
             $path = '';
             $parentFolder = $document->getParent();
             if ($parentFolder instanceof FolderInterface) {

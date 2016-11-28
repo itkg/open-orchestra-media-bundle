@@ -3,10 +3,9 @@
 namespace OpenOrchestra\MediaModelBundle\Tests\EventListener;
 
 use OpenOrchestra\BaseBundle\Tests\AbstractTest\AbstractBaseTestCase;
-use OpenOrchestra\ModelInterface\Model\NodeInterface;
 use Phake;
 use OpenOrchestra\MediaModelBundle\EventListener\GeneratePathListener;
-use OpenOrchestra\ModelBundle\Document\Node;
+use OpenOrchestra\Media\Model\MediaFolderInterface;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -63,36 +62,38 @@ class GeneratePathListenerTest extends AbstractBaseTestCase
 
     /**
      *
-     * @param string          $method
-     * @param Node            $node
-     * @param Node            $parentNode
-     * @param ArrayCollection $children
-     * @param array           $expectedPath
+     * @param string               $method
+     * @param MediaFolderInterface $folder
+     * @param ArrayCollection      $children
+     * @param array                $expectedPath
      *
-     * @dataProvider provideNodeForRecord
+     * @dataProvider provideFolderForRecord
      */
-    public function testRecord($method, Node $node, Node $parentNode, ArrayCollection $children, $expectedPath)
-    {
+    public function testRecord(
+        $method,
+        MediaFolderInterface $folder,
+        ArrayCollection $children,
+        $expectedFolderPath,
+        $expectedChildFolderPath
+    ) {
         $documentManager = Phake::mock('Doctrine\ODM\MongoDB\DocumentManager');
         $unitOfWork = Phake::mock('Doctrine\ODM\MongoDB\UnitOfWork');
 
-        Phake::when($this->folderRepository)->findInLastVersion(Phake::anyParameters())->thenReturn($parentNode);
         Phake::when($unitOfWork)->recomputeSingleDocumentChangeSet(Phake::anyParameters())->thenReturn('test');
-        Phake::when($documentManager)->getClassMetadata(Phake::anyParameters())->thenReturn(new ClassMetadata('OpenOrchestra\ModelBundle\Document\Node'));
+        Phake::when($documentManager)->getClassMetadata(Phake::anyParameters())
+            ->thenReturn(new ClassMetadata('OpenOrchestra\Media\Model\MediaFolderInterface'));
         Phake::when($documentManager)->getUnitOfWork()->thenReturn($unitOfWork);
-        Phake::when($this->lifecycleEventArgs)->getDocument()->thenReturn($node);
+        Phake::when($this->lifecycleEventArgs)->getDocument()->thenReturn($folder);
         Phake::when($this->lifecycleEventArgs)->getDocumentManager()->thenReturn($documentManager);
         Phake::when($this->folderRepository)->findSubTreeByPath(Phake::anyParameters())->thenReturn($children);
 
         $this->listener->$method($this->lifecycleEventArgs);
 
-        Phake::verify($node, Phake::never())->setNodeId(Phake::anyParameters());
-        Phake::verify($node)->setPath($expectedPath[0]);
+        Phake::verify($folder, Phake::never())->setFolderId(Phake::anyParameters());
+        Phake::verify($folder)->setPath($expectedFolderPath);
         Phake::verify($documentManager, Phake::never())->getRepository(Phake::anyParameters());
-        $count = 1;
         foreach ($children as $child) {
-            Phake::verify($child)->setPath($expectedPath[$count]);
-            $count ++;
+           Phake::verify($child)->setPath($expectedChildFolderPath);
         }
     }
 
@@ -100,95 +101,81 @@ class GeneratePathListenerTest extends AbstractBaseTestCase
      *
      * @return array
      */
-    public function provideNodeForRecord()
+    public function provideFolderForRecord()
     {
-        $node0 = Phake::mock('OpenOrchestra\ModelBundle\Document\Node');
-        Phake::when($node0)->getNodeId()->thenReturn('fakeId');
-        Phake::when($node0)->getPath()->thenReturn('fakeParentPath/fakePastId');
-        Phake::when($node0)->isDeleted()->thenReturn(false);
+        $parentPath    = '/parentPath';
+        $folderId      = 'folderId';
+        $oldFolderPath = $parentPath . '/oldId';
+        $newFolderPath = $parentPath . '/' . $folderId;
+        $childId       = 'childId';
 
-        $parentNode0 = Phake::mock('OpenOrchestra\ModelBundle\Document\Node');
-        Phake::when($parentNode0)->getPath()->thenReturn('fakePath');
-        Phake::when($parentNode0)->getPath()->thenReturn('fakeParentPath');
-        Phake::when($parentNode0)->isDeleted()->thenReturn(false);
+        $parentFolder = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        Phake::when($parentFolder)->getPath()->thenReturn($parentPath);
 
-        $child0_0 = Phake::mock('OpenOrchestra\ModelBundle\Document\Node');
-        Phake::when($child0_0)->getPath()->thenReturn('fakeParentPath/fakePastId/fakeChild0Id');
-        Phake::when($child0_0)->isDeleted()->thenReturn(false);
+        $folder = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        Phake::when($folder)->getFolderId()->thenReturn($folderId);
+        Phake::when($folder)->getPath()->thenReturn($oldFolderPath);
+        Phake::when($folder)->getParent()->thenReturn($parentFolder);
 
-        $children0 = new ArrayCollection();
-        $children0->add($child0_0);
+        $child = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        Phake::when($child)->getPath()->thenReturn($oldFolderPath . '/' . $childId);
 
-        $node1 = Phake::mock('OpenOrchestra\ModelBundle\Document\Node');
-        Phake::when($node1)->getNodeId()->thenReturn('fakeId');
-        Phake::when($node1)->getPath()->thenReturn('fakeParentPath/fakePastId');
-        Phake::when($node1)->isDeleted()->thenReturn(false);
+        $children = new ArrayCollection();
+        $children->add($child);
 
-        $parentNode1 = Phake::mock('OpenOrchestra\ModelBundle\Document\Node');
-        Phake::when($parentNode1)->getPath()->thenReturn('fakePath');
-        Phake::when($parentNode1)->getPath()->thenReturn('fakeParentPath');
-        Phake::when($parentNode1)->isDeleted()->thenReturn(false);
+        $parentFolder2 = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        Phake::when($parentFolder2)->getPath()->thenReturn($parentPath);
 
-        $child1_0 = Phake::mock('OpenOrchestra\ModelBundle\Document\Node');
-        Phake::when($child1_0)->getPath()->thenReturn('fakeParentPath/fakePastId/fakeChild0Id');
-        Phake::when($child1_0)->isDeleted()->thenReturn(false);
+        $folder2 = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        Phake::when($folder2)->getFolderId()->thenReturn($folderId);
+        Phake::when($folder2)->getPath()->thenReturn($oldFolderPath);
+        Phake::when($folder2)->getParent()->thenReturn($parentFolder2);
 
-        $children1 = new ArrayCollection();
-        $children1->add($child1_0);
+        $child2 = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        Phake::when($child2)->getPath()->thenReturn($oldFolderPath . '/' . $childId);
 
+        $children2 = new ArrayCollection();
+        $children->add($child2);
 
         return array(
-            array('prePersist', $node0, $parentNode0, $children0, array('fakeParentPath/fakeId', 'fakeParentPath/fakeId/fakeChild0Id')),
-            array('preUpdate', $node1, $parentNode1, $children1, array('fakeParentPath/fakeId', 'fakeParentPath/fakeId/fakeChild0Id'))
+            array('prePersist', $folder,  $children,  $newFolderPath, $newFolderPath . '/' . $childId),
+            array('preUpdate' , $folder2, $children2, $newFolderPath, $newFolderPath . '/' . $childId),
         );
     }
 
     /**
-     * Test no update path if node is deleted
-     */
-    public function testWithDeleteNode()
-    {
-        $node = Phake::mock('OpenOrchestra\ModelInterface\Model\NodeInterface');
-        Phake::when($this->lifecycleEventArgs)->getDocument()->thenReturn($node);
-
-        $this->listener->prePersist($this->lifecycleEventArgs);
-
-        Phake::verify($node, Phake::never())->setPath(Phake::anyParameters());
-    }
-
-    /**
-     * @param array $nodes
+     * @param array $folders
      *
-     * @dataProvider provideNodes
+     * @dataProvider provideFolders
      */
-    public function testPostFlush($nodes)
+    public function testPostFlush($folders)
     {
         $event = Phake::mock('Doctrine\ODM\MongoDB\Event\PostFlushEventArgs');
         Phake::when($event)->getDocumentManager()->thenReturn($this->documentManager);
-        $this->listener->nodes = $nodes;
+        $this->listener->folders = $folders;
 
         $this->listener->postFlush($event);
 
-        foreach ($nodes as $node) {
-            Phake::verify($this->documentManager, Phake::atLeast(1))->persist($node);
+        foreach ($folders as $folder) {
+            Phake::verify($this->documentManager, Phake::atLeast(1))->persist($folder);
         }
         Phake::verify($this->documentManager)->flush();
-        $this->assertEmpty($this->listener->nodes);
+        $this->assertEmpty($this->listener->folders);
     }
 
     /**
      * @return array
      */
-    public function provideNodes()
+    public function provideFolders()
     {
-        $node1 = Phake::mock('OpenOrchestra\ModelInterface\Model\NodeInterface');
-        $node2 = Phake::mock('OpenOrchestra\ModelInterface\Model\NodeInterface');
-        $node3 = Phake::mock('OpenOrchestra\ModelInterface\Model\NodeInterface');
+        $folder1 = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        $folder2 = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
+        $folder3 = Phake::mock('OpenOrchestra\Media\Model\MediaFolderInterface');
 
         return array(
-            array($node1),
-            array($node1, $node2),
-            array($node1, $node2, $node3),
+            array($folder1),
+            array($folder1, $folder2),
+            array($folder1, $folder2, $folder3),
         );
     }
 }
