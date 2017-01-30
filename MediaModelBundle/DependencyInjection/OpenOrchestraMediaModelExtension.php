@@ -34,11 +34,9 @@ class OpenOrchestraMediaModelExtension extends Extension
                 $container->setParameter('open_orchestra_media.document.' . $class . '.class', $content['class']);
                 $definition = new Definition($content['repository'], array($content['class']));
                 $definition->setFactory(array(new Reference('doctrine.odm.mongodb.document_manager'), 'getRepository'));
-                if ('media_folder' == $class) {
-                    $definition->addMethodCall('setAggregationQueryBuilder', array(
-                        new Reference('doctrine_mongodb.odm.default_aggregation_query')
-                    ));
-                }
+                $definition->addMethodCall('setAggregationQueryBuilder', array(
+                    new Reference('doctrine_mongodb.odm.default_aggregation_query')
+                ));
                 $container->setDefinition('open_orchestra_media.repository.' . $class, $definition);
             }
         }
