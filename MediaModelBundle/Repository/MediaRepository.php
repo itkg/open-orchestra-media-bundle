@@ -76,6 +76,25 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
+     * @param array $mediaIds
+     *
+     * @throws \Exception
+     */
+    public function removeMedias(array $mediaIds)
+    {
+        $mediaMongoIds = array();
+        foreach ($mediaIds as $mediaId) {
+            $mediaMongoIds[] = new \MongoId($mediaId);
+        }
+
+        $qb = $this->createQueryBuilder();
+        $qb->remove()
+            ->field('id')->in($mediaMongoIds)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
      * @param PaginateFinderConfiguration $configuration
      *
      * @return array
@@ -128,8 +147,6 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
      */
     protected function filterSearch(PaginateFinderConfiguration $configuration, Stage $qa)
     {
-//         var_dump($configuration);exit();
-
         $label = $configuration->getSearchIndex('label');
         $language = $configuration->getSearchIndex('language');
         if (null !== $label && '' !== $label && null !== $language && '' !== $language) {
@@ -141,6 +158,11 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
         $type = $configuration->getSearchIndex('type');
         if (null !== $type && '' !== $type) {
             $qa->match(array('mediaType' => $type));
+        }
+
+        $folderId = $configuration->getSearchIndex('folderId');
+        if (null !== $folderId && '' !== $folderId) {
+            $qa->match(array('mediaFolder.$id' => new \MongoId($folderId)));
         }
 
         return $qa;

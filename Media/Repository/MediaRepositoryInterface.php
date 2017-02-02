@@ -49,6 +49,13 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
     public function findOneByName($name);
 
     /**
+     * @param array $mediaIds
+     *
+     * @throws \Exception
+     */
+    public function removeMedias(array $mediaIds);
+
+    /**
      * @param PaginateFinderConfiguration $configuration
      *
      * @return array
