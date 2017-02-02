@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\Collection;
 use OpenOrchestra\Media\Repository\FolderRepositoryInterface;
 use OpenOrchestra\ModelInterface\Repository\FieldAutoGenerableRepositoryInterface;
 use OpenOrchestra\Repository\AbstractAggregateRepository;
-use OpenOrchestra\Media\Model\FolderInterface;
 
 /**
  * Class FolderRepository
