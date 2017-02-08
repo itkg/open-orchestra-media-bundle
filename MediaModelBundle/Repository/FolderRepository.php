@@ -125,7 +125,7 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
      *
      * @return array
      */
-    protected function getChildren($parent, array &$folders)
+    protected function getChildren($parent, array $folders)
     {
         $children = array();
         foreach ($folders as $key => $folder) {
