@@ -50,4 +50,11 @@ interface FolderRepositoryInterface
      * @return array
      */
     public function findFolderTree($siteId);
+
+    /**
+     * @param string $id
+     *
+     * @return FolderInterface
+     */
+    public function findOneById($id);
 }
