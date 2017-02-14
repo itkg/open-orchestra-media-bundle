@@ -87,23 +87,11 @@ class Media implements MediaInterface
     protected $titles;
 
     /**
-     * @ODM\Field(type="hash")
-     */
-    protected $alts;
-
-    /**
      * @var string
      *
      * @ODM\Field(type="string")
      */
     protected $copyright;
-
-    /**
-     * @var string
-     *
-     * @ODM\Field(type="string")
-     */
-    protected $comment;
 
     /**
      * @ODM\Field(type="hash")
@@ -122,7 +110,6 @@ class Media implements MediaInterface
     {
         $this->keywords = new ArrayCollection();
         $this->titles = array();
-        $this->alts = array();
     }
 
     /**
@@ -243,75 +230,6 @@ class Media implements MediaInterface
     public function setThumbnail($thumbnail)
     {
         $this->thumbnail = $thumbnail;
-    }
-
-    /**
-     * @param array $alts
-     */
-    public function setAlts(array $alts)
-    {
-        foreach ($alts as $language => $alt) {
-            $this->addTitle($language, $alt);
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getAlts()
-    {
-        return $this->alts;
-    }
-
-    /**
-     * @param string $language
-     *
-     * @return string
-     */
-    public function getAlt($language)
-    {
-        if (isset($this->alts[$language])) {
-            return $this->alts[$language];
-        }
-
-        return '';
-    }
-
-    /**
-     * @param string $language
-     * @param string $alt
-     */
-    public function addAlt($language, $alt)
-    {
-        if (is_string($language) && is_string($alt)) {
-            $this->alts[$language] = $alt;
-        }
-    }
-
-    /**
-     * @param string $language
-     */
-    public function removeAlt($language)
-    {
-        if (is_string($language) && isset($this->alts[$language])) {
-            unset($this->alts[$language]);
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * @param string $comment
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
     }
 
     /**

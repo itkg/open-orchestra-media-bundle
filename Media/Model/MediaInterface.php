@@ -92,33 +92,6 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
     public function setThumbnail($thumbnail);
 
     /**
-     * @param string $language
-     *
-     * @return string
-     */
-    public function getAlt($language);
-
-    /**
-     * @param array $alts
-     */
-    public function setAlts(array $alts);
-
-    /**
-     * @return array
-     */
-    public function getAlts();
-
-    /**
-     * @return string
-     */
-    public function getComment();
-
-    /**
-     * @param string $comment
-     */
-    public function setComment($comment);
-
-    /**
      * @return string
      */
     public function getCopyright();
@@ -167,17 +140,6 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
      * @return string|null
      */
     public function getAlternative($formatName);
-
-    /**
-     * @param string $language
-     * @param string $alt
-     */
-    public function addAlt($language, $alt);
-
-    /**
-     * @param string $language
-     */
-    public function removeAlt($language);
 
     /**
      * @param string $language
