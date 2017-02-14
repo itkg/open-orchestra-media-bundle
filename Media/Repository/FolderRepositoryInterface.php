@@ -43,4 +43,11 @@ interface FolderRepositoryInterface
      * @return Collection
      */
     public function findBySiteId($siteId, $parentId = null);
+
+    /**
+     * @param string $siteId
+     *
+     * @return array
+     */
+    public function findFolderTree($siteId);
 }
