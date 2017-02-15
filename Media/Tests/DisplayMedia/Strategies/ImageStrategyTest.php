@@ -36,7 +36,6 @@ class ImageStrategyTest extends AbstractStrategyTest
     public function testRenderMedia($image, $url, $alt, $id = '', $class = '', $style = '')
     {
         Phake::when($this->media)->getFilesystemName()->thenReturn($image);
-        Phake::when($this->media)->getAlt(Phake::anyParameters())->thenReturn($alt);
 
         parent::testRenderMedia($image, $url, $alt);
 
@@ -50,7 +49,7 @@ class ImageStrategyTest extends AbstractStrategyTest
             'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $url,
-                'media_alt' => $alt,
+                'media_alt' => '',
                 'id' => $id,
                 'class' => $class,
                 'style' => $style
@@ -82,7 +81,6 @@ class ImageStrategyTest extends AbstractStrategyTest
     {
         Phake::when($this->media)->getId()->thenReturn($id);
         Phake::when($this->media)->getFilesystemName()->thenReturn($image);
-        Phake::when($this->media)->getAlt(Phake::anyParameters())->thenReturn($alt);
         Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
 
         $this->strategy->displayMediaForWysiwyg($this->media, $format);
@@ -91,7 +89,7 @@ class ImageStrategyTest extends AbstractStrategyTest
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:image.html.twig',
             array(
                 'media_url' => $url,
-                'media_alt' => $alt,
+                'media_alt' => '',
                 'media_id' => $id,
                 'media_format' => $format,
                 'style' => '',

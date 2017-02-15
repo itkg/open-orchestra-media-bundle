@@ -48,7 +48,6 @@ abstract class AbstractStrategyTest extends AbstractBaseTestCase
     {
         Phake::when($this->media)->getName()->thenReturn($image);
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
-        Phake::when($this->media)->getAlt(Phake::anyParameters())->thenReturn($alt);
         Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
     }
 
@@ -64,7 +63,6 @@ abstract class AbstractStrategyTest extends AbstractBaseTestCase
     public function testDisplayMediaForWysiwyg($image, $url, $alt, $id = null, $format = null)
     {
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
-        Phake::when($this->media)->getAlt(Phake::anyParameters())->thenReturn($alt);
         Phake::when($this->media)->getId(Phake::anyParameters())->thenReturn($id);
         Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
 
@@ -74,7 +72,7 @@ abstract class AbstractStrategyTest extends AbstractBaseTestCase
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:thumbnail.html.twig',
             array(
                 'media_url' => $url,
-                'media_alt' => $alt,
+                'media_alt' => '',
                 'media_id' => $id,
                 'style' => '',
             )

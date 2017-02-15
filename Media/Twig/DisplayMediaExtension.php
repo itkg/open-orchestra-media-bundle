@@ -96,12 +96,6 @@ class DisplayMediaExtension extends \Twig_Extension
      */
     public function getMediaAlt($mediaId)
     {
-        $media = $this->getMedia($mediaId);
-
-        if ($media) {
-            return $media->getAlt($this->getRequestLanguage());
-        }
-
         return '';
     }
 

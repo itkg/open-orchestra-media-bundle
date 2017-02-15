@@ -147,7 +147,7 @@ abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAware
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:thumbnail.html.twig',
             array(
                 'media_url' => $this->getFileUrl($media->getThumbnail()),
-                'media_alt' => $media->getAlt($request->getLocale()),
+                'media_alt' => '',
                 'media_id' => $media->getId(),
                 'style' => $style
             )

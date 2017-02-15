@@ -37,7 +37,7 @@ class ImageStrategy extends AbstractStrategy
             'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $options['format']),
-                'media_alt' => $media->getAlt($request->getLocale()),
+                'media_alt' => '',
                 'id' => $options['id'],
                 'class' => $options['class'],
                 'style' => $options['style']
@@ -62,7 +62,7 @@ class ImageStrategy extends AbstractStrategy
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:image.html.twig',
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $format),
-                'media_alt' => $media->getAlt($request->getLocale()),
+                'media_alt' => '',
                 'media_id' => $media->getId(),
                 'media_format' => $format,
                 'style' => $style,
