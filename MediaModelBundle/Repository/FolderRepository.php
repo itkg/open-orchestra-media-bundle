@@ -139,4 +139,13 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
 
         return $children;
     }
+
+    /**
+     * @param string $id
+     *
+     * @return FolderInterface
+     */
+    public function findOneById($id) {
+        return $this->find($id);
+    }
 }
