@@ -119,9 +119,13 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     /**
      * @return int
      */
-    public function count()
+    public function count($type = null)
     {
         $qa = $this->createAggregationQuery();
+
+        if ($type) {
+            $qa->match(array('mediaType' => $type));
+        }
 
         return $this->countDocumentAggregateQuery($qa);
     }
