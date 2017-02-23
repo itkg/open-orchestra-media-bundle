@@ -56,7 +56,7 @@ class DisplayMediaExtensionTest extends AbstractBaseTestCase
      */
     public function testFunctions()
     {
-        $this->assertCount(4, $this->extension->getFunctions());
+        $this->assertCount(3, $this->extension->getFunctions());
     }
 
     /**

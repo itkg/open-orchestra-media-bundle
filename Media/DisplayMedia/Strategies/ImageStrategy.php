@@ -37,7 +37,7 @@ class ImageStrategy extends AbstractStrategy
             'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $options['format']),
-                'media_alt' => $options['alt'],
+                'media_alt' => '',
                 'id'        => $options['id'],
                 'class'     => $options['class'],
                 'style'     => $options['style']
