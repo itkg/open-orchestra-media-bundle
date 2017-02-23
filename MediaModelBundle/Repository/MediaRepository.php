@@ -123,7 +123,7 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     {
         $qa = $this->createAggregationQuery();
 
-        if ($type) {
+        if (null !== $type) {
             $qa->match(array('mediaType' => $type));
         }
 
