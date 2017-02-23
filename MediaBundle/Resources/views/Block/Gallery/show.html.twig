@@ -14,10 +14,10 @@
                 {% set picture = mediaInfos.id %}
                 <div>
                     <img data-u="image" src="{{ get_media_url(picture, imageFormat) }}"
-                        title="{{ get_media_title(picture) }}"  alt="{{ get_media_alt(picture) }}"
+                        title="{{ get_media_title(picture) }}"
                     />
                     <img data-u="thumb" src="{{ get_media_url(picture, thumbnailFormat) }}"
-                        title="{{ get_media_title(picture) }}"  alt="{{ get_media_alt(picture) }}"
+                        title="{{ get_media_title(picture) }}"
                     />
                 </div>
             {% endfor %}

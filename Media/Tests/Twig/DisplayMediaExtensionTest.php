@@ -119,34 +119,6 @@ class DisplayMediaExtensionTest extends AbstractBaseTestCase
      * @param string $language
      * @param string $value
      *
-     * @dataProvider provideMediaAlt
-     */
-    public function testGetMediaAlt($mediaId, $language, $value)
-    {
-        Phake::when($this->request)->get(Phake::anyParameters())->thenReturn($language);
-        Phake::when($this->mediaRepository)->find(Phake::anyParameters())->thenReturn($this->media);
-
-        $result = $this->extension->getMediaAlt($mediaId);
-
-        $this->assertSame('', $result);
-    }
-
-    /**
-     * @return array
-     */
-    public function provideMediaAlt()
-    {
-        return array(
-            array('mediaId', 'en', 'alten'),
-            array('mediaId', 'fr', 'altfr'),
-        );
-    }
-
-    /**
-     * @param string $mediaId
-     * @param string $language
-     * @param string $value
-     *
      * @dataProvider provideMediaTitle
      */
     public function testGetMediaTitle($mediaId, $language, $value)

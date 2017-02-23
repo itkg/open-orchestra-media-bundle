@@ -17,9 +17,9 @@ class DisplayMediaExtension extends \Twig_Extension
     protected $request;
 
     /**
-     * @param DisplayMediaManager               $displayMediaManager
-     * @param MediaRepositoryInterface          $mediaRepository
-     * @param RequestStack                      $requestStack
+     * @param DisplayMediaManager       $displayMediaManager
+     * @param MediaRepositoryInterface  $mediaRepository
+     * @param RequestStack              $requestStack
      */
     public function __construct(
         DisplayMediaManager $displayMediaManager,
@@ -49,9 +49,6 @@ class DisplayMediaExtension extends \Twig_Extension
 
             // Get the title of a media
             new \Twig_SimpleFunction('get_media_title', array($this, 'getMediaTitle')),
-
-            // Get the alt of a media
-            new \Twig_SimpleFunction('get_media_alt', array($this, 'getMediaAlt')),
         );
     }
 
@@ -86,16 +83,6 @@ class DisplayMediaExtension extends \Twig_Extension
             return $this->displayMediaManager->getMediaFormatUrl($media, $format);
         }
 
-        return '';
-    }
-
-    /**
-     * @param string $mediaId
-     *
-     * @return string
-     */
-    public function getMediaAlt($mediaId)
-    {
         return '';
     }
 
