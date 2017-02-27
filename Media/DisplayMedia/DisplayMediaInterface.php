@@ -41,12 +41,15 @@ interface DisplayMediaInterface
 
     /**
      * @param MediaInterface $media
+     *
+     * @param MediaInterface $media
      * @param string         $format
-     * @param string         $style
+     * @param string         $alt
+     * @param string         $legend
      *
      * @return string
      */
-    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $style = '');
+    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $alt = '', $legend = '');
 
     /**
      * @param MediaInterface $media

@@ -71,20 +71,21 @@ class DisplayMediaManager
     /**
      * @param MediaInterface $media
      * @param string         $format
-     * @param string         $style
+     * @param string         $alt
+     * @param string         $legend
      *
      * @return string
      */
-    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $style = '')
+    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $alt = '', $legend = '')
     {
         /** @var DisplayMediaInterface $strategy */
         foreach ($this->strategies as $strategy) {
             if ($strategy->support($media)) {
-                return $strategy->displayMediaForWysiwyg($media, $format, $style);
+                return $strategy->displayMediaForWysiwyg($media, $format, $alt, $legend);
             }
         }
 
-        return $this->defaultStrategy->displayMediaForWysiwyg($media, $format, $style);
+        return $this->defaultStrategy->displayMediaForWysiwyg($media, $format, $alt, $legend);
     }
 
     /**

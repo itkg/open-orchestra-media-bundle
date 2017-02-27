@@ -50,22 +50,23 @@ class ImageStrategy extends AbstractStrategy
      *
      * @param MediaInterface $media
      * @param string         $format
-     * @param string         $style
+     * @param string         $alt
+     * @param string         $legend
      *
      * @return string
      */
-    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $style = '')
+    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $alt= '', $legend = '')
     {
         $request = $this->requestStack->getMasterRequest();
 
         return $this->render(
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:image.html.twig',
             array(
-                'media_url' => $this->getMediaFormatUrl($media, $format),
-                'media_alt' => '',
-                'media_id' => $media->getId(),
+                'media_url'    => $this->getMediaFormatUrl($media, $format),
+                'media_alt'    => $alt,
+                'media_id'     => $media->getId(),
                 'media_format' => $format,
-                'style' => $style,
+                'media_legend' => $legend,
             )
         );
     }

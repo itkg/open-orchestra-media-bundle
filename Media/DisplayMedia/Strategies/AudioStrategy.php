@@ -48,17 +48,17 @@ class AudioStrategy extends AbstractStrategy
      *
      * @param MediaInterface $media
      * @param string         $format
-     * @param string         $style
+     * @param string         $alt
+     * @param string         $legend
      *
      * @return string
      */
-    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $style = '')
+    public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $alt = '', $legend = '')
     {
         return $this->render(
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:audio.html.twig',
             array(
-                'media_id' => $media->getId(),
-                'style' => $style,
+                'media_id' => $media->getId()
             )
         );
     }

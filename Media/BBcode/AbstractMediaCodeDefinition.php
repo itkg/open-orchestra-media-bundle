@@ -7,7 +7,6 @@ use OpenOrchestra\BBcodeBundle\Definition\BBcodeDefinition;
 use OpenOrchestra\BBcodeBundle\ElementNode\BBcodeElementNodeInterface;
 use OpenOrchestra\BBcodeBundle\ElementNode\BBcodeElementNode;
 use OpenOrchestra\Media\DisplayMedia\DisplayMediaManager;
-use OpenOrchestra\Media\Model\MediaInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -75,7 +74,12 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
         if ($media) {
             if ($preview) {
 
-                return $this->displayMediaManager->displayMediaForWysiwyg($media, $this->getFormat($el), $this->getStyle($el));
+                return $this->displayMediaManager->displayMediaForWysiwyg(
+                    $media,
+                    $this->getFormat($el),
+                    $this->getAlt($el),
+                    $this->getLegend($el)
+                );
             } else {
 
                 return $this->displayMediaManager->renderMedia($media, array('format' => $this->getFormat($el), 'style' => $this->getStyle($el)));
@@ -94,7 +98,7 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
      */
     protected function getFormat(BBcodeElementNodeInterface $el)
     {
-        return MediaInterface::MEDIA_ORIGINAL;
+        return $this->getAttribute($el, 'format');
     }
 
     /**
@@ -106,6 +110,45 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
      */
     protected function getStyle(BBcodeElementNodeInterface $el)
     {
+        return '';
+    }
+
+    /**
+     * Get requested media alt
+     *
+     * @param BBcodeElementNodeInterface $el
+     *
+     * @return string
+     */
+    protected function getAlt(BBcodeElementNodeInterface $el)
+    {
+        return $this->getAttribute($el, 'alt');
+    }
+
+    /**
+     * Get requested media legend
+     *
+     * @param BBcodeElementNodeInterface $el
+     *
+     * @return string
+     */
+    protected function getLegend(BBcodeElementNodeInterface $el)
+    {
+        return $this->getAttribute($el, 'legend');
+    }
+
+    protected function getAttribute(BBcodeElementNodeInterface $el, $attribute)
+    {
+        $attributes = $el->getAttribute();
+
+        if (isset($attributes[self::TAG_NAME])) {
+            $attributes = json_decode($attributes[self::TAG_NAME]);
+            if (isset($attributes->$attribute)) {
+
+                return $attributes->$attribute;
+            }
+        }
+
         return '';
     }
 }
