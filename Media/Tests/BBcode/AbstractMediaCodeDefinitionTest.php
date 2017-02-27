@@ -120,6 +120,6 @@ abstract class AbstractMediaCodeDefinitionTest extends AbstractBaseTestCase
     {
         $html = $this->definition->getPreviewHtml($this->BBcodeElementNode);
 
-        Phake::verify($this->displayManager)->displayMediaForWysiwyg($this->media, $expectedFormat, '');
+        Phake::verify($this->displayManager)->displayMediaForWysiwyg($this->media, $expectedFormat, '', '');
     }
 }

@@ -82,7 +82,13 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
                 );
             } else {
 
-                return $this->displayMediaManager->renderMedia($media, array('format' => $this->getFormat($el), 'style' => $this->getStyle($el)));
+                return $this->displayMediaManager->renderMedia(
+                    $media,
+                    array(
+                        'format' => $this->getFormat($el),
+                        'style' => $this->getStyle($el)
+                    )
+                );
             }
         }
 

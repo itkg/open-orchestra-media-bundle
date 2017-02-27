@@ -92,7 +92,7 @@ class ImageStrategyTest extends AbstractStrategyTest
                 'media_alt' => '',
                 'media_id' => $id,
                 'media_format' => $format,
-                'style' => '',
+                'media_legend' => '',
             )
         );
     }

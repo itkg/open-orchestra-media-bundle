@@ -35,7 +35,7 @@ class MediaWithoutFormatCodeDefinitionTest extends AbstractMediaCodeDefinitionTe
     public function provideFormat()
     {
         return array(
-            array(MediaInterface::MEDIA_ORIGINAL)
+            array($this->format)
         );
     }
 }

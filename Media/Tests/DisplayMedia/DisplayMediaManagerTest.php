@@ -150,7 +150,7 @@ class DisplayMediaManagerTest extends AbstractBaseTestCase
         $media = $this->manager->displayMediaForWysiwyg($this->media);
 
         $this->assertSupportChain();
-        Phake::verify($this->displayMediaStrategy1)->displayMediaForWysiwyg($this->media, '', '');
+        Phake::verify($this->displayMediaStrategy1)->displayMediaForWysiwyg($this->media, '', '', '');
 
         $this->assertSame($this->phakeHtml['displayMediaStrategy1']['displayMediaForWysiwyg'], $media);
     }
@@ -164,7 +164,7 @@ class DisplayMediaManagerTest extends AbstractBaseTestCase
         $media = $this->manager->displayMediaForWysiwyg($this->media);
 
         $this->assertSupportChain();
-        Phake::verify($this->defaultStrategy)->displayMediaForWysiwyg($this->media, '', '');
+        Phake::verify($this->defaultStrategy)->displayMediaForWysiwyg($this->media, '', '', '');
 
         $this->assertSame($this->phakeHtml['defaultStrategy']['displayMediaForWysiwyg'], $media);
     }

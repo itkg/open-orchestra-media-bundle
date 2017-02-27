@@ -87,8 +87,7 @@ class AudioStrategyTest extends AbstractStrategyTest
         Phake::verify($this->templating)->render(
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:audio.html.twig',
             array(
-                'media_id' => $image,
-                'style' => '',
+                'media_id' => $image
             )
         );
     }
