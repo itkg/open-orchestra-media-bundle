@@ -143,6 +143,14 @@ abstract class AbstractMediaCodeDefinition extends BBcodeDefinition
         return $this->getAttribute($el, 'legend');
     }
 
+    /**
+     * Get requested media legend
+     *
+     * @param BBcodeElementNodeInterface $el
+     * @param string                     $attribute
+     *
+     * @return string
+     */
     protected function getAttribute(BBcodeElementNodeInterface $el, $attribute)
     {
         $attributes = $el->getAttribute();
