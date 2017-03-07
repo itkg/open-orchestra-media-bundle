@@ -7,7 +7,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 /**
  * Class ImageStrategy
  */
-class ImageStrategy extends AbstractStrategy
+class ImageStrategy extends AbstractDisplayMediaStrategy
 {
     const MEDIA_TYPE = 'image';
 

@@ -3,14 +3,14 @@
 namespace OpenOrchestra\Media\DisplayBlock\Strategies;
 
 use OpenOrchestra\BaseBundle\Manager\TagManager;
-use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractStrategy;
+use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractDisplayBlockStrategy;
 use OpenOrchestra\ModelInterface\Model\ReadBlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class SlideshowStrategy
  */
-class SlideshowStrategy extends AbstractStrategy
+class SlideshowStrategy extends AbstractDisplayBlockStrategy
 {
     const NAME = 'slideshow';
 

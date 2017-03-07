@@ -2,7 +2,7 @@
 
 namespace OpenOrchestra\Media\DisplayBlock\Strategies;
 
-use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractStrategy;
+use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractDisplayBlockStrategy;
 use OpenOrchestra\ModelInterface\Model\ReadBlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -12,7 +12,7 @@ use OpenOrchestra\BaseBundle\Manager\TagManager;
 /**
  * Class GalleryStrategy
  */
-class GalleryStrategy extends AbstractStrategy
+class GalleryStrategy extends AbstractDisplayBlockStrategy
 {
     const NAME = 'gallery';
 

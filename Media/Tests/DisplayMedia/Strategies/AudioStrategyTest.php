@@ -8,7 +8,7 @@ use OpenOrchestra\Media\DisplayMedia\Strategies\AudioStrategy;
 /**
  * Class AudioStrategyTest
  */
-class AudioStrategyTest extends AbstractStrategyTest
+class AudioStrategyTest extends AbstractDisplayMediaStrategyTest
 {
     /**
      * Set up the test

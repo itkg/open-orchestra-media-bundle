@@ -6,9 +6,9 @@ use OpenOrchestra\BaseBundle\Tests\AbstractTest\AbstractBaseTestCase;
 use Phake;
 
 /**
- * Class AbstractStrategyTest
+ * Class AbstractDisplayMediaStrategyTest
  */
-abstract class AbstractStrategyTest extends AbstractBaseTestCase
+abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
 {
     protected $media;
     protected $router;

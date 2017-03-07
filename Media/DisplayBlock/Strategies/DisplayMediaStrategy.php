@@ -2,7 +2,7 @@
 
 namespace OpenOrchestra\Media\DisplayBlock\Strategies;
 
-use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractStrategy;
+use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractDisplayBlockStrategy;
 use OpenOrchestra\ModelInterface\Model\ReadBlockInterface;
 use OpenOrchestra\ModelInterface\Repository\ReadNodeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class DisplayMediaStrategy
  */
-class DisplayMediaStrategy extends AbstractStrategy
+class DisplayMediaStrategy extends AbstractDisplayBlockStrategy
 {
     const NAME = "display_media";
 

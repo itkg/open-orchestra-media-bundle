@@ -7,7 +7,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 /**
  * Class DefaultStrategy
  */
-class DefaultStrategy extends AbstractStrategy
+class DefaultStrategy extends AbstractDisplayMediaStrategy
 {
     /**
      * @param MediaInterface $media

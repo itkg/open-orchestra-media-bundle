@@ -9,7 +9,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 /**
  * Class PdfStrategyTest
  */
-class PdfStrategyTest extends AbstractStrategyTest
+class PdfStrategyTest extends AbstractDisplayMediaStrategyTest
 {
     /**
      * Set up the test

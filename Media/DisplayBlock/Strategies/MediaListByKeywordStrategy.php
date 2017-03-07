@@ -2,7 +2,7 @@
 
 namespace OpenOrchestra\Media\DisplayBlock\Strategies;
 
-use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractStrategy;
+use OpenOrchestra\DisplayBundle\DisplayBlock\Strategies\AbstractDisplayBlockStrategy;
 use OpenOrchestra\Media\Repository\MediaRepositoryInterface;
 use OpenOrchestra\ModelInterface\Model\ReadBlockInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use OpenOrchestra\BaseBundle\Manager\TagManager;
 /**
  * Class MediaListByKeywordStrategy
  */
-class MediaListByKeywordStrategy extends AbstractStrategy
+class MediaListByKeywordStrategy extends AbstractDisplayBlockStrategy
 {
     const NAME = 'media_list_by_keyword';
 

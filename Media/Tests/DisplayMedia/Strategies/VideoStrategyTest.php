@@ -9,7 +9,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 /**
  * Class VideoStrategyTest
  */
-class VideoStrategyTest extends AbstractStrategyTest
+class VideoStrategyTest extends AbstractDisplayMediaStrategyTest
 {
     protected $translator;
     protected $translation = 'Some Translation';

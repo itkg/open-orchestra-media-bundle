@@ -14,9 +14,9 @@ use OpenOrchestra\Media\Exception\BadOptionFormatException;
 use OpenOrchestra\Media\Exception\BadOptionException;
 
 /**
- * Class AbstractStrategy
+ * Class AbstractDisplayMediaStrategy
  */
-abstract class AbstractStrategy implements DisplayMediaInterface, ContainerAwareInterface
+abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
 

@@ -7,7 +7,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 /**
  * Class AudioStrategy
  */
-class AudioStrategy extends AbstractStrategy
+class AudioStrategy extends AbstractDisplayMediaStrategy
 {
     const MEDIA_TYPE = 'audio';
 

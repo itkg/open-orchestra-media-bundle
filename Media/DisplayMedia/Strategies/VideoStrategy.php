@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Class VideoStrategy
  */
-class VideoStrategy extends AbstractStrategy
+class VideoStrategy extends AbstractDisplayMediaStrategy
 {
     const MEDIA_TYPE = 'video';
 

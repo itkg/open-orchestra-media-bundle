@@ -7,7 +7,7 @@ use OpenOrchestra\Media\Model\MediaInterface;
 /**
  * Class PdfStrategy
  */
-class PdfStrategy extends AbstractStrategy
+class PdfStrategy extends AbstractDisplayMediaStrategy
 {
     const MEDIA_TYPE = 'pdf';
 
