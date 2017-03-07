@@ -38,12 +38,6 @@ class OpenOrchestraMediaExtension extends Extension
             $this->updateBlockParameter($container);
             $loader->load('display_block.yml');
         }
-
-        if ($container->hasParameter('assetic.bundles')) {
-            $asseticBundles = $container->getParameter('assetic.bundles');
-            $asseticBundles[] = 'OpenOrchestraMediaBundle';
-            $container->setParameter('assetic.bundles', $asseticBundles);
-        }
     }
 
     /**
