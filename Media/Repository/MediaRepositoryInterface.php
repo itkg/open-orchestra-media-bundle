@@ -18,15 +18,6 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
      * @return Collection
      */
     public function findByFolderId($folderId);
-
-    /**
-     * @param string $folderId
-     * @param string $mediaType
-     *
-     * @return Collection
-     */
-    public function findByFolderIdAndMediaType($folderId, $mediaType);
-
     /**
      * @param string $keywords
      *

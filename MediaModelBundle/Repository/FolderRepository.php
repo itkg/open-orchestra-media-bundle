@@ -3,6 +3,7 @@
 namespace OpenOrchestra\MediaModelBundle\Repository;
 
 use Doctrine\Common\Collections\Collection;
+use OpenOrchestra\Media\Model\FolderInterface;
 use OpenOrchestra\Media\Repository\FolderRepositoryInterface;
 use OpenOrchestra\ModelInterface\Repository\FieldAutoGenerableRepositoryInterface;
 use OpenOrchestra\Repository\AbstractAggregateRepository;
@@ -13,20 +14,6 @@ use OpenOrchestra\Repository\AbstractAggregateRepository;
 class FolderRepository extends AbstractAggregateRepository implements FolderRepositoryInterface, FieldAutoGenerableRepositoryInterface
 {
     /**
-     * @param string $siteId
-     *
-     * @return Collection
-     */
-    public function findAllRootFolderBySiteId($siteId)
-    {
-        $qb = $this->createQueryBuilder();
-        $qb->field('parent')->equals(null);
-        $qb->field('siteId')->equals($siteId);
-
-        return $qb->getQuery()->execute();
-    }
-
-    /**
      * @param string $parentId
      * @param string $siteId
      *
@@ -35,19 +22,6 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
      * @return Collection
      */
     public function findByParentAndSite($parentId, $siteId)
-    {
-        return $this->findBySiteId($siteId, $parentId);
-    }
-
-    /**
-     * @param string      $siteId
-     * @param string|null $parentId
-     *
-     * @throws \Exception
-     *
-     * @return Collection
-     */
-    public function findBySiteId($siteId, $parentId = null)
     {
         $qb = $this->createQueryBuilder();
         if ($parentId) {
@@ -58,6 +32,11 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
         return $qb->getQuery()->execute();
     }
 
+    /**
+     * @param string $path
+     *
+     * @return array
+     */
     public function findSubTreeByPath($path)
     {
         $qa = $this->createAggregationQuery();
@@ -67,7 +46,7 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
     }
 
     /**
-     * @param string $nodeId
+     * @param string $folderId
      *
      * @return boolean
      */
@@ -120,7 +99,7 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
     }
 
     /**
-     * @param string $parentId
+     * @param string $parent
      * @param array  $folders
      *
      * @return array

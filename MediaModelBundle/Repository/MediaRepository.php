@@ -37,22 +37,6 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
-     * @param string $folderId
-     * @param string $mediaType
-     *
-     * @return Collection
-     */
-    public function findByFolderIdAndMediaType($folderId, $mediaType)
-    {
-        $qb = $this->createQueryBuilder();
-
-        $qb->field('mediaFolder.id')->equals($folderId);
-        $qb->field('mediaType')->equals($mediaType);
-
-        return $qb->getQuery()->execute();
-    }
-
-    /**
      * @param string $keywords
      *
      * @return array
@@ -117,6 +101,8 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
+     * @param string $type
+     *
      * @return int
      */
     public function count($type = null)
