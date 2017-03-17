@@ -6,7 +6,6 @@ use OpenOrchestra\Media\DisplayMedia\DisplayMediaInterface;
 use OpenOrchestra\Media\Model\MediaInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use OpenOrchestra\Media\Exception\MissingOptionException;
@@ -26,12 +25,10 @@ abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, Co
     protected $validOptions;
 
     /**
-     * @param RequestStack $requestStack
-     * @param string       $mediaDomain
+     * @param string $mediaDomain
      */
-    public function __construct(RequestStack $requestStack, $mediaDomain = "")
+    public function __construct($mediaDomain = "")
     {
-        $this->requestStack = $requestStack;
         $this->mediaDomain = $mediaDomain;
         $this->validOptions = array('format', 'style', 'class', 'id');
     }
@@ -142,8 +139,6 @@ abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, Co
      */
     public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $alt = '', $legend = '')
     {
-        $request = $this->requestStack->getMasterRequest();
-
         return $this->render(
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:thumbnail.html.twig',
             array(

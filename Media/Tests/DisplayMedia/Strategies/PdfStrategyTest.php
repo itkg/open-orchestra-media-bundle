@@ -18,7 +18,7 @@ class PdfStrategyTest extends AbstractDisplayMediaStrategyTest
     {
         parent::setUp();
 
-        $this->strategy = new PdfStrategy($this->requestStack, '');
+        $this->strategy = new PdfStrategy('');
         $this->strategy->setContainer($this->container);
         $this->strategy->setRouter($this->router);
     }

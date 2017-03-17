@@ -3,7 +3,6 @@
 namespace OpenOrchestra\Media\DisplayMedia\Strategies;
 
 use OpenOrchestra\Media\Model\MediaInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class VideoStrategy
@@ -13,12 +12,11 @@ class VideoStrategy extends AbstractDisplayMediaStrategy
     const MEDIA_TYPE = 'video';
 
     /**
-     * @param RequestStack $requestStack
-     * @param string       $mediaDomain
+     * @param string $mediaDomain
      */
-    public function __construct(RequestStack $requestStack, $mediaDomain = "")
+    public function __construct($mediaDomain = "")
     {
-        parent::__construct($requestStack, $mediaDomain);
+        parent::__construct($mediaDomain);
 
         $this->validOptions[] = 'width';
         $this->validOptions[] = 'height';

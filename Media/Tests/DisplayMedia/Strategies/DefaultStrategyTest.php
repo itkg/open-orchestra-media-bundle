@@ -18,7 +18,7 @@ class DefaultStrategyTest extends AbstractDisplayMediaStrategyTest
     {
         parent::setUp();
 
-        $this->strategy = new DefaultStrategy($this->requestStack);
+        $this->strategy = new DefaultStrategy();
         $this->strategy->setContainer($this->container);
         $this->strategy->setRouter($this->router);
     }

@@ -15,7 +15,6 @@ services:
     open_orchestra_media.display_media.image:
         class: '%open_orchestra_media.display_media.image.class%'
         arguments:
-            - '@request_stack'
             - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
@@ -24,7 +23,6 @@ services:
     open_orchestra_media.display_media.pdf:
         class: '%open_orchestra_media.display_media.pdf.class%'
         arguments:
-            - '@request_stack'
             - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
@@ -33,7 +31,6 @@ services:
     open_orchestra_media.display_media.video:
         class: '%open_orchestra_media.display_media.video.class%'
         arguments:
-            - '@request_stack'
             - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
@@ -42,7 +39,6 @@ services:
     open_orchestra_media.display_media.audio:
         class: '%open_orchestra_media.display_media.audio.class%'
         arguments:
-            - '@request_stack'
             - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
@@ -51,7 +47,6 @@ services:
     open_orchestra_media.display_media.default:
         class: '%open_orchestra_media.display_media.default.class%'
         arguments:
-            - '@request_stack'
             - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]

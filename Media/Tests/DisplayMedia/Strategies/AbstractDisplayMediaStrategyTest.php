@@ -15,7 +15,6 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
     protected $container;
     protected $request;
     protected $strategy;
-    protected $requestStack;
     protected $locale = 'en';
     protected $pathToFile = 'pathToFile';
     protected $templating;
@@ -27,8 +26,6 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
     {
         $this->request = Phake::mock('Symfony\Component\HttpFoundation\Request');
         Phake::when($this->request)->getLocale()->thenReturn($this->locale);
-        $this->requestStack = Phake::mock('Symfony\Component\HttpFoundation\RequestStack');
-        Phake::when($this->requestStack)->getMasterRequest()->thenReturn($this->request);
         $this->media = Phake::mock('OpenOrchestra\Media\Model\MediaInterface');
         $this->router = Phake::mock('Symfony\Component\Routing\Router');
         $this->templating = Phake::mock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');

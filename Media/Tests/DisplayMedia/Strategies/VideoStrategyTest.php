@@ -23,7 +23,7 @@ class VideoStrategyTest extends AbstractDisplayMediaStrategyTest
 
         $this->translator = Phake::mock('Symfony\Component\Translation\TranslatorInterface');
         Phake::when($this->translator)->trans(Phake::anyParameters())->thenReturn($this->translation);
-        $this->strategy = new VideoStrategy($this->requestStack, '', $this->translator);
+        $this->strategy = new VideoStrategy('', $this->translator);
         $this->strategy->setContainer($this->container);
         $this->strategy->setRouter($this->router);
     }

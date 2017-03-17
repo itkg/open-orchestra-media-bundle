@@ -31,8 +31,6 @@ class ImageStrategy extends AbstractDisplayMediaStrategy
     {
         $options = $this->validateOptions($options, __METHOD__);
 
-        $request = $this->requestStack->getMasterRequest();
-
         return $this->render(
             'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
@@ -57,8 +55,6 @@ class ImageStrategy extends AbstractDisplayMediaStrategy
      */
     public function displayMediaForWysiwyg(MediaInterface $media, $format = '', $alt= '', $legend = '')
     {
-        $request = $this->requestStack->getMasterRequest();
-
         return $this->render(
             'OpenOrchestraMediaBundle:BBcode/WysiwygDisplay:image.html.twig',
             array(

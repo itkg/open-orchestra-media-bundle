@@ -18,7 +18,7 @@ class ImageStrategyTest extends AbstractDisplayMediaStrategyTest
     {
         parent::setUp();
 
-        $this->strategy = new ImageStrategy($this->requestStack, '');
+        $this->strategy = new ImageStrategy('');
         $this->strategy->setContainer($this->container);
         $this->strategy->setRouter($this->router);
     }

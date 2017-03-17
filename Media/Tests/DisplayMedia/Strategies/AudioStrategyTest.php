@@ -17,7 +17,7 @@ class AudioStrategyTest extends AbstractDisplayMediaStrategyTest
     {
         parent::setUp();
 
-        $this->strategy = new AudioStrategy($this->requestStack);
+        $this->strategy = new AudioStrategy();
         $this->strategy->setContainer($this->container);
         $this->strategy->setRouter($this->router);
     }
