@@ -80,14 +80,15 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
 
     /**
      * @param PaginateFinderConfiguration $configuration
+     * @param string                      $siteId
      *
      * @return array
      */
-    public function findForPaginate(PaginateFinderConfiguration $configuration)
+    public function findForPaginate(PaginateFinderConfiguration $configuration, $siteId)
     {
         $qa = $this->createAggregationQuery();
 
-        $this->filterSearch($configuration, $qa);
+        $this->filterSearch($configuration, $qa, $siteId);
 
         $order = $configuration->getOrder();
         if (!empty($order)) {
@@ -102,13 +103,14 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
 
     /**
      * @param string $type
+     * @param string $siteId
      *
      * @return int
      */
-    public function count($type = null)
+    public function count($siteId, $type = null)
     {
         $qa = $this->createAggregationQuery();
-
+        $qa->match(array('siteId' => $siteId));
         if (null !== $type) {
             $qa->match(array('mediaType' => $type));
         }
@@ -118,13 +120,14 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
 
     /**
      * @param PaginateFinderConfiguration $configuration
+     * @param string                      $siteId
      *
      * @return int
      */
-    public function countWithFilter(PaginateFinderConfiguration $configuration)
+    public function countWithFilter(PaginateFinderConfiguration $configuration, $siteId)
     {
         $qa = $this->createAggregationQuery();
-        $this->filterSearch($configuration, $qa);
+        $this->filterSearch($configuration, $qa, $siteId);
 
         return $this->countDocumentAggregateQuery($qa);
     }
@@ -132,11 +135,13 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     /**
      * @param PaginateFinderConfiguration $configuration
      * @param Stage                       $qa
+     * @param string                      $siteId
      *
      * @return array
      */
-    protected function filterSearch(PaginateFinderConfiguration $configuration, Stage $qa)
+    protected function filterSearch(PaginateFinderConfiguration $configuration, Stage $qa, $siteId)
     {
+        $qa->match(array('siteId' => $siteId));
         $label = $configuration->getSearchIndex('label');
         $language = $configuration->getSearchIndex('language');
         if (null !== $label && '' !== $label && null !== $language && '' !== $language) {

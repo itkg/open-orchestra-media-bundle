@@ -42,6 +42,13 @@ class Media implements MediaInterface
     protected $name;
 
     /**
+     * @var string
+     *
+     * @ODM\Field(type="string")
+     */
+    protected $siteId;
+
+    /**
      * @var string $filesystemName
      *
      * @ODM\Field(type="string")
@@ -134,6 +141,22 @@ class Media implements MediaInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
+     * @param string $siteId
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
     }
 
     /**

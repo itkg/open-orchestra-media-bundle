@@ -31,6 +31,17 @@ interface MediaInterface extends TimestampableInterface, BlameableInterface, Key
      */
     public function getId();
 
+
+    /**
+     * @return string
+     */
+    public function getSiteId();
+
+    /**
+     * @param string $siteId
+     */
+    public function setSiteId($siteId);
+
     /**
      * @return string
      */

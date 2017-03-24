@@ -38,6 +38,13 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('repository')->defaultValue('OpenOrchestra\MediaModelBundle\Repository\FolderRepository')->end()
                         ->end()
                     ->end()
+                    ->arrayNode('media_library_sharing')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('class')->defaultValue('OpenOrchestra\MediaModelBundle\Document\MediaLibrarySharing')->end()
+                            ->scalarNode('repository')->defaultValue('OpenOrchestra\MediaModelBundle\Repository\MediaLibrarySharingRepository')->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ->end();
