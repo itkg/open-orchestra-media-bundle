@@ -33,6 +33,7 @@ class EntityTest extends AbstractBaseTestCase
             array('Media', 'MediaInterface'),
             array('MediaFolder','FolderInterface'),
             array('MediaFolder','MediaFolderInterface'),
+            array('MediaLibrarySharing','MediaLibrarySharingInterface'),
         );
     }
 
