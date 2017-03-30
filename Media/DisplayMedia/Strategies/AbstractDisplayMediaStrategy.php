@@ -6,8 +6,6 @@ use OpenOrchestra\Media\DisplayMedia\DisplayMediaInterface;
 use OpenOrchestra\Media\Model\MediaInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use OpenOrchestra\Media\Exception\MissingOptionException;
 use OpenOrchestra\Media\Exception\BadOptionFormatException;
 use OpenOrchestra\Media\Exception\BadOptionException;
@@ -19,28 +17,14 @@ abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, Co
 {
     use ContainerAwareTrait;
 
-    protected $router;
-    protected $requestStack;
-    protected $mediaDomain;
     protected $validOptions;
 
     /**
-     * @param string $mediaDomain
+     * Constructor
      */
-    public function __construct($mediaDomain = "")
+    public function __construct()
     {
-        $this->mediaDomain = $mediaDomain;
         $this->validOptions = array('format', 'style', 'class', 'id');
-    }
-
-    /**
-     * Set the router
-     *
-     * @param RouterInterface $router
-     */
-    public function setRouter(RouterInterface $router)
-    {
-        $this->router = $router;
     }
 
     /**
@@ -172,10 +156,6 @@ abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, Co
      */
     protected function getFileUrl($storageKey)
     {
-        return '//' . $this->mediaDomain
-            . $this->router->generate('open_orchestra_media_get',
-            array('key' => $storageKey),
-            UrlGeneratorInterface::ABSOLUTE_PATH
-        );
+        return $this->container->get('open_orchestra_media.manager.storage')->getUrl($storageKey);
     }
 }

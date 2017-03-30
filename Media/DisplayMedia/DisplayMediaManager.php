@@ -3,7 +3,6 @@
 namespace OpenOrchestra\Media\DisplayMedia;
 
 use OpenOrchestra\Media\Model\MediaInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class DisplayMediaManager
@@ -11,16 +10,13 @@ use Symfony\Component\Routing\RouterInterface;
 class DisplayMediaManager
 {
     protected $strategies = array();
-    protected $router;
     protected $defaultStrategy;
 
     /**
-     * @param RouterInterface       $router
      * @param DisplayMediaInterface $defaultStrategy
      */
-    public function __construct(RouterInterface $router, DisplayMediaInterface $defaultStrategy)
+    public function __construct(DisplayMediaInterface $defaultStrategy)
     {
-        $this->router = $router;
         $this->defaultStrategy = $defaultStrategy;
     }
 
@@ -29,7 +25,6 @@ class DisplayMediaManager
      */
     public function addStrategy(DisplayMediaInterface $strategy)
     {
-        $strategy->setRouter($this->router);
         $this->strategies[$strategy->getName()] = $strategy;
     }
 

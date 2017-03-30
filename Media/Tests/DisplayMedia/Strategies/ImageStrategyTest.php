@@ -18,9 +18,8 @@ class ImageStrategyTest extends AbstractDisplayMediaStrategyTest
     {
         parent::setUp();
 
-        $this->strategy = new ImageStrategy('');
+        $this->strategy = new ImageStrategy();
         $this->strategy->setContainer($this->container);
-        $this->strategy->setRouter($this->router);
     }
 
     /**
@@ -81,7 +80,8 @@ class ImageStrategyTest extends AbstractDisplayMediaStrategyTest
     {
         Phake::when($this->media)->getId()->thenReturn($id);
         Phake::when($this->media)->getFilesystemName()->thenReturn($image);
-        Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
+        Phake::when($this->media)->getAlternative($format)->thenReturn($image);
+        Phake::when($this->mediaStorageManager)->getUrl(Phake::anyParameters())->thenReturn('//'.$this->pathToFile . '/' . $image);
 
         $this->strategy->displayMediaForWysiwyg($this->media, $format);
 
@@ -130,13 +130,11 @@ class ImageStrategyTest extends AbstractDisplayMediaStrategyTest
     public function testGetMediaFormatUrl($image, $format, $url)
     {
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
-        Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn(
-            (MediaInterface::MEDIA_ORIGINAL == $format) ?
-                $this->pathToFile . '/' . $image :
-                $this->pathToFile . '/' . $format. '-' . $image
-        );
+        Phake::when($this->media)->getAlternative($format)->thenReturn($format.'-'.$image);
+        Phake::when($this->media)->getFilesystemName()->thenReturn($image);
 
-        $this->assertSame($url, $this->strategy->getMediaFormatUrl($this->media, $format));
+        $this->strategy->getMediaFormatUrl($this->media, $format);
+        Phake::verify($this->mediaStorageManager)->getUrl(Phake::anyParameters());
     }
 
     /**

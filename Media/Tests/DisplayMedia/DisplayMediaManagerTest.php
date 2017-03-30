@@ -15,7 +15,6 @@ class DisplayMediaManagerTest extends AbstractBaseTestCase
      * @var DisplayMediaManager
      */
     protected $manager;
-    protected $router;
     protected $media;
     protected $displayMediaStrategy1;
     protected $displayMediaStrategy2;
@@ -40,7 +39,6 @@ class DisplayMediaManagerTest extends AbstractBaseTestCase
      */
     public function setUp()
     {
-        $this->router = Phake::mock('Symfony\Component\Routing\Router');
         $this->media = Phake::mock('OpenOrchestra\Media\Model\MediaInterface');
 
         $this->defaultStrategy = Phake::mock('OpenOrchestra\Media\DisplayMedia\DisplayMediaInterface');
@@ -71,7 +69,7 @@ class DisplayMediaManagerTest extends AbstractBaseTestCase
         Phake::when($this->displayMediaStrategy2)->support($this->media)->thenReturn(false);
         Phake::when($this->displayMediaStrategy2)->getName()->thenReturn('phake_strategie_2');
 
-        $this->manager = new DisplayMediaManager($this->router, $this->defaultStrategy);
+        $this->manager = new DisplayMediaManager($this->defaultStrategy);
 
         $this->manager->addStrategy($this->displayMediaStrategy2);
         $this->manager->addStrategy($this->displayMediaStrategy1);
@@ -85,7 +83,6 @@ class DisplayMediaManagerTest extends AbstractBaseTestCase
         $fakeStrategy = Phake::mock('OpenOrchestra\Media\DisplayMedia\DisplayMediaInterface');
 
         $this->manager->addStrategy($fakeStrategy);
-        Phake::verify($fakeStrategy)->setRouter($this->router);
     }
 
     /**

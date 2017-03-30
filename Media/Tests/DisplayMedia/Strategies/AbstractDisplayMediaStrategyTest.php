@@ -11,13 +11,13 @@ use Phake;
 abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
 {
     protected $media;
-    protected $router;
     protected $container;
     protected $request;
     protected $strategy;
     protected $locale = 'en';
     protected $pathToFile = 'pathToFile';
     protected $templating;
+    protected $mediaStorageManager;
 
     /**
      * Set up the test
@@ -27,11 +27,12 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
         $this->request = Phake::mock('Symfony\Component\HttpFoundation\Request');
         Phake::when($this->request)->getLocale()->thenReturn($this->locale);
         $this->media = Phake::mock('OpenOrchestra\Media\Model\MediaInterface');
-        $this->router = Phake::mock('Symfony\Component\Routing\Router');
         $this->templating = Phake::mock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $this->mediaStorageManager = Phake::mock('OpenOrchestra\Media\Manager\MediaStorageManagerInterface');
 
         $this->container = Phake::mock('Symfony\Component\DependencyInjection\ContainerInterface');
         Phake::when($this->container)->get('templating')->thenReturn($this->templating);
+        Phake::when($this->container)->get('open_orchestra_media.manager.storage')->thenReturn($this->mediaStorageManager);
     }
 
     /**
@@ -45,7 +46,8 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
     {
         Phake::when($this->media)->getName()->thenReturn($image);
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
-        Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
+        Phake::when($this->media)->getFilesystemName()->thenReturn($image);
+        Phake::when($this->mediaStorageManager)->getUrl(Phake::anyParameters())->thenReturn('//'.$this->pathToFile . '/' . $image);
     }
 
     /**
@@ -61,7 +63,7 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
     {
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
         Phake::when($this->media)->getId(Phake::anyParameters())->thenReturn($id);
-        Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
+        Phake::when($this->mediaStorageManager)->getUrl(Phake::anyParameters())->thenReturn('//'.$this->pathToFile . '/' . $image);
 
         $this->strategy->displayMediaForWysiwyg($this->media, $format);
 
@@ -85,7 +87,7 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
     public function testDisplayPreview($image, $url)
     {
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
-        Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
+        Phake::when($this->mediaStorageManager)->getUrl(Phake::anyParameters())->thenReturn('//'.$this->pathToFile . '/' . $image);
 
         $this->assertSame($url, $this->strategy->displayPreview($this->media));
     }
@@ -104,9 +106,10 @@ abstract class AbstractDisplayMediaStrategyTest extends AbstractBaseTestCase
      */
     public function testGetMediaFormatUrl($image, $format, $url)
     {
+        Phake::when($this->mediaStorageManager)->getUrl(Phake::anyParameters())->thenReturn('//'.$this->pathToFile . '/' . $image);
+
         Phake::when($this->media)->getName()->thenReturn($image);
         Phake::when($this->media)->getThumbnail()->thenReturn($image);
-        Phake::when($this->router)->generate(Phake::anyParameters())->thenReturn($this->pathToFile . '/' . $image);
 
         $this->assertSame($url, $this->strategy->getMediaFormatUrl($this->media, $format));
     }

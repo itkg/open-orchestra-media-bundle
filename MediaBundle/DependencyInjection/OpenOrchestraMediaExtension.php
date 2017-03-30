@@ -27,12 +27,14 @@ class OpenOrchestraMediaExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('open_orchestra_media.media_domain', $config['media_domain']);
+        $container->setParameter('open_orchestra_media.media_storage_directory', $config['media_storage_directory']);
         $container->setParameter('open_orchestra_media.allowed_mime_type', $config['allowed_mime_type']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('bbcode.yml');
         $loader->load('display.yml');
         $loader->load('twig.yml');
+        $loader->load('manager.yml');
 
         if (array_key_exists("OpenOrchestraDisplayBundle", $container->getParameter('kernel.bundles'))) {
             $this->updateBlockParameter($container);

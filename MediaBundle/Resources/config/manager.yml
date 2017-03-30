@@ -1,0 +1,10 @@
+parameters:
+    open_orchestra_media.manager.storage.class: OpenOrchestra\Media\Manager\MediaStorageManager
+
+services:
+    open_orchestra_media.manager.storage:
+        class: '%open_orchestra_media.manager.storage.class%'
+        arguments:
+            - '@filesystem'
+            - '%open_orchestra_media.media_domain%'
+            - '%open_orchestra_media.media_storage_directory%'

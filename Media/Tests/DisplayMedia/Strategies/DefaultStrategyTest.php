@@ -20,7 +20,6 @@ class DefaultStrategyTest extends AbstractDisplayMediaStrategyTest
 
         $this->strategy = new DefaultStrategy();
         $this->strategy->setContainer($this->container);
-        $this->strategy->setRouter($this->router);
     }
 
     /**

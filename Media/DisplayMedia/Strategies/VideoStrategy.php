@@ -12,12 +12,11 @@ class VideoStrategy extends AbstractDisplayMediaStrategy
     const MEDIA_TYPE = 'video';
 
     /**
-     * @param string $mediaDomain
+     * Constructor
      */
-    public function __construct($mediaDomain = "")
+    public function __construct()
     {
-        parent::__construct($mediaDomain);
-
+        parent::__construct();
         $this->validOptions[] = 'width';
         $this->validOptions[] = 'height';
     }
@@ -60,8 +59,7 @@ class VideoStrategy extends AbstractDisplayMediaStrategy
      * @param array  $options
      * @param string $method     the method requiring the validation
      *
-     * @throws BadOptionException
-     * @throws MissingOptionException
+     * @return array
      */
     protected function validateOptions(array $options, $method)
     {

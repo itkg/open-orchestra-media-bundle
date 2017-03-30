@@ -19,7 +19,6 @@ class AudioStrategyTest extends AbstractDisplayMediaStrategyTest
 
         $this->strategy = new AudioStrategy();
         $this->strategy->setContainer($this->container);
-        $this->strategy->setRouter($this->router);
     }
 
     /**
@@ -80,7 +79,6 @@ class AudioStrategyTest extends AbstractDisplayMediaStrategyTest
     public function testDisplayMediaForWysiwyg($image, $url, $alt, $id = null, $format = null)
     {
         Phake::when($this->media)->getId(Phake::anyParameters())->thenReturn($image);
-        $format = 'preview';
 
         $this->strategy->displayMediaForWysiwyg($this->media);
 

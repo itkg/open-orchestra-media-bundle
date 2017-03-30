@@ -32,6 +32,7 @@ class DisplayMediaExtensionTest extends AbstractBaseTestCase
         $this->request = Phake::mock('Symfony\Component\HttpFoundation\Request');
         $this->requestStack = Phake::mock('Symfony\Component\HttpFoundation\RequestStack');
         Phake::when($this->requestStack)->getMasterRequest()->thenReturn($this->request);
+
         $this->displayMediaManager = Phake::mock('OpenOrchestra\Media\DisplayMedia\DisplayMediaManager');
         $this->mediaRepository = Phake::mock('OpenOrchestra\Media\Repository\MediaRepositoryInterface');
         $this->media = Phake::mock('OpenOrchestra\Media\Model\MediaInterface');

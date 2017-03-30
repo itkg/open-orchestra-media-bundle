@@ -10,44 +10,33 @@ services:
     open_orchestra_media.display_media_manager:
         class: '%open_orchestra_media.display_media_manager.class%'
         arguments:
-            - '@router'
             - '@open_orchestra_media.display_media.default'
     open_orchestra_media.display_media.image:
         class: '%open_orchestra_media.display_media.image.class%'
-        arguments:
-            - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.pdf:
         class: '%open_orchestra_media.display_media.pdf.class%'
-        arguments:
-            - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.video:
         class: '%open_orchestra_media.display_media.video.class%'
-        arguments:
-            - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.audio:
         class: '%open_orchestra_media.display_media.audio.class%'
-        arguments:
-            - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: open_orchestra_media.display_media.strategy }
     open_orchestra_media.display_media.default:
         class: '%open_orchestra_media.display_media.default.class%'
-        arguments:
-            - '%open_orchestra_media.media_domain%'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags:

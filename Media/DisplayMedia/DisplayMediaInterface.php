@@ -3,7 +3,6 @@
 namespace OpenOrchestra\Media\DisplayMedia;
 
 use OpenOrchestra\Media\Model\MediaInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class DisplayMediaInterface
@@ -16,13 +15,6 @@ interface DisplayMediaInterface
      * @return bool
      */
     public function support(MediaInterface $media);
-
-    /**
-     * Set the router
-     *
-     * @param RouterInterface $router
-     */
-    public function setRouter(RouterInterface $router);
 
     /**
      * @param MediaInterface $media

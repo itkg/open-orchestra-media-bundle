@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->scalarNode('media_domain')->defaultValue('')->end()
+            ->scalarNode('media_storage_directory')->defaultValue('')->end()
             ->arrayNode('allowed_mime_type')
             ->info('List of allowed mime type')
             ->prototype('scalar')->end()

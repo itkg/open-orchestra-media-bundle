@@ -14,7 +14,7 @@ class DisplayMediaExtension extends \Twig_Extension
 {
     protected $displayMediaManager;
     protected $mediaRepository;
-    protected $request;
+    protected $requestStack;
 
     /**
      * @param DisplayMediaManager       $displayMediaManager
@@ -28,7 +28,7 @@ class DisplayMediaExtension extends \Twig_Extension
     ) {
         $this->displayMediaManager = $displayMediaManager;
         $this->mediaRepository = $mediaRepository;
-        $this->request = $requestStack->getMasterRequest();
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -119,6 +119,7 @@ class DisplayMediaExtension extends \Twig_Extension
     protected function getMedia($mediaId)
     {
         $media = $this->mediaRepository->find($mediaId);
+
         return $media;
     }
 
@@ -127,6 +128,8 @@ class DisplayMediaExtension extends \Twig_Extension
      */
     protected function getRequestLanguage()
     {
-        return $this->request->get('language', $this->request->getLocale());
+        $defaultLocale = $this->requestStack->getMasterRequest()->getLocale();
+
+        return $this->requestStack->getMasterRequest()->get('language', $defaultLocale);
     }
 }
