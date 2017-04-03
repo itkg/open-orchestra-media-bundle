@@ -75,16 +75,11 @@ class MediaStorageManager implements MediaStorageManagerInterface
      */
     public function downloadFile($key, $downloadDir)
     {
-        if ($this->exists($key)) {
-            $downloadedFilePath = $downloadDir . DIRECTORY_SEPARATOR . $key;
-            $fileHandler = fopen($downloadedFilePath, 'a');
-            fwrite($fileHandler, $this->getFileContent($key));
-            fclose($fileHandler);
+        $targetPath = $downloadDir . DIRECTORY_SEPARATOR . $key;
+        $path = $this->computePath($key);
+        $this->fileSystem->copy($path, $targetPath);
 
-            return $downloadedFilePath;
-        }
-
-        return '';
+        return $targetPath;
     }
 
     /**

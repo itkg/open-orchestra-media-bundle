@@ -138,10 +138,22 @@ class MediaStorageManagerTest extends \PHPUnit_Framework_TestCase
      * 
      * @return array
      */
-    public function provideUrl() {
+    public function provideUrl()
+    {
         return array(
             array(null, null),
             array('randomKey', '//' . $this->mediaDomain . '/randomKey'),
         );
+    }
+
+    /**
+     * Test download file
+     */
+    public function testDownloadFile()
+    {
+        $key = 'fakeKey';
+        $dir = 'fakeDir';
+        $this->mediaStorageManager->downloadFile($key, $dir);
+        Phake::verify($this->filesystem)->copy($this->mediaDirectory . DIRECTORY_SEPARATOR . $key ,$dir . DIRECTORY_SEPARATOR . $key);
     }
 }
