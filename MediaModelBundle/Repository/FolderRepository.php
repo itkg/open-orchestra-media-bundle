@@ -40,7 +40,7 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
     public function findSubTreeByPath($path)
     {
         $qa = $this->createAggregationQuery();
-        $qa->match(array('path' => new \MongoRegex('/'.preg_quote($path).'.+/')));
+        $qa->match(array('path' => new \MongoRegex('/'.preg_quote($path).'(\/*)+/')));
 
         return $this->hydrateAggregateQuery($qa);
     }

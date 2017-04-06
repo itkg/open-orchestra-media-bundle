@@ -158,6 +158,8 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
         $folderId = $configuration->getSearchIndex('folderId');
         if (null !== $folderId && '' !== $folderId) {
             $qa->match(array('mediaFolder.$id' => new \MongoId($folderId)));
+        } elseif (is_array($configuration->getSearchIndex('perimeterFolderIds'))) {
+            $qa->match($this->generateFilterMediaPerimeter($configuration->getSearchIndex('perimeterFolderIds')));
         }
 
         return $qa;
@@ -171,5 +173,20 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     protected function generateFilterKeywordLabel($label)
     {
         return array('label' => new \MongoRegex('/.*' . $label . '.*/i'));
+    }
+
+    /**
+     * @param array $perimeterFolderIds
+     * @return \MongoId[][][]
+     */
+    protected function generateFilterMediaPerimeter(array $perimeterFolderIds)
+    {
+        $folderIds = array();
+
+        foreach ($perimeterFolderIds as $key => $folderId) {
+            $folderIds[] = new \MongoId($folderId);
+        }
+
+        return array('mediaFolder.$id' => array('$in' => $folderIds));
     }
 }
