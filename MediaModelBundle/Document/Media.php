@@ -91,7 +91,7 @@ class Media implements MediaInterface
     /**
      * @ODM\Field(type="hash")
      */
-    protected $titles;
+    protected $titles = array();
 
     /**
      * @var string
@@ -116,7 +116,6 @@ class Media implements MediaInterface
     public function __construct()
     {
         $this->keywords = new ArrayCollection();
-        $this->titles = array();
     }
 
     /**
