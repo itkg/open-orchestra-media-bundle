@@ -107,12 +107,15 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
      *
      * @return int
      */
-    public function count($siteId, $type = null)
+    public function count($siteId, $type = null, $foldersId = null)
     {
         $qa = $this->createAggregationQuery();
         $qa->match(array('siteId' => $siteId));
         if (null !== $type) {
             $qa->match(array('mediaType' => $type));
+        }
+        if (null !== $foldersId) {
+            $qa->match($this->generateFilterMediaPerimeter($foldersId));
         }
 
         return $this->countDocumentAggregateQuery($qa);
@@ -142,6 +145,7 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     protected function filterSearch(PaginateFinderConfiguration $configuration, Stage $qa, $siteId)
     {
         $qa->match(array('siteId' => $siteId));
+
         $label = $configuration->getSearchIndex('label');
         $language = $configuration->getSearchIndex('language');
         if (null !== $label && '' !== $label && null !== $language && '' !== $language) {

@@ -58,7 +58,7 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
      * @param string $siteId
      * @return int
      */
-    public function count($siteId);
+    public function count($siteId, $type = null, $foldersId = null);
 
     /**
      * @param PaginateFinderConfiguration $configuration
