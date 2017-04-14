@@ -35,10 +35,11 @@ class ImageStrategy extends AbstractDisplayMediaStrategy
             'OpenOrchestraMediaBundle:RenderMedia:image.html.twig',
             array(
                 'media_url' => $this->getMediaFormatUrl($media, $options['format']),
-                'media_alt' => '',
+                'media_alt' => $options['alt'],
                 'id'        => $options['id'],
                 'class'     => $options['class'],
-                'style'     => $options['style']
+                'style'     => $options['style'],
+                'legend'    => $options['legend']
             )
         );
     }

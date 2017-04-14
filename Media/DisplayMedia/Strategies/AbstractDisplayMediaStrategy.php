@@ -24,7 +24,7 @@ abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, Co
      */
     public function __construct()
     {
-        $this->validOptions = array('format', 'style', 'class', 'id');
+        $this->validOptions = array('format', 'style', 'class', 'id', 'alt', 'legend');
     }
 
     /**
@@ -58,11 +58,15 @@ abstract class AbstractDisplayMediaStrategy implements DisplayMediaInterface, Co
         $options = $this->setOptionIfNotSet($options, 'style', '');
         $options = $this->setOptionIfNotSet($options, 'class', '');
         $options = $this->setOptionIfNotSet($options, 'id', '');
+        $options = $this->setOptionIfNotSet($options, 'alt', '');
+        $options = $this->setOptionIfNotSet($options, 'legend', '');
 
         $this->checkIfString($options, 'format', $method);
         $this->checkIfString($options, 'style', $method);
         $this->checkIfString($options, 'class', $method);
         $this->checkIfString($options, 'id', $method);
+        $this->checkIfString($options, 'alt', $method);
+        $this->checkIfString($options, 'legend', $method);
 
         return $options;
     }
