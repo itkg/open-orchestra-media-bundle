@@ -51,7 +51,8 @@ class ImageStrategyTest extends AbstractDisplayMediaStrategyTest
                 'media_alt' => '',
                 'id' => $id,
                 'class' => $class,
-                'style' => $style
+                'style' => $style,
+                'legend' => ''
             )
         );
     }
