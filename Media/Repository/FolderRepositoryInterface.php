@@ -40,4 +40,9 @@ interface FolderRepositoryInterface
      * @return FolderInterface
      */
     public function findOneById($id);
+
+    /**
+     * @param $siteId
+     */
+    public function removeAllBySiteId($siteId);
 }

@@ -127,4 +127,16 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
     public function findOneById($id) {
         return $this->find($id);
     }
+
+    /**
+     * @param $siteId
+     */
+    public function removeAllBySiteId($siteId)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->remove()
+            ->field('siteId')->in($siteId)
+            ->getQuery()
+            ->execute();
+    }
 }

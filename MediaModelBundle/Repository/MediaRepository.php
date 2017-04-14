@@ -79,6 +79,18 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
+     * @param $siteId
+     */
+    public function removeAllBySiteId($siteId)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->remove()
+            ->field('siteId')->in($siteId)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
      * @param PaginateFinderConfiguration $configuration
      * @param string                      $siteId
      *
@@ -132,6 +144,11 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
         return $this->countDocumentAggregateQuery($qa);
     }
 
+    /**
+     * @param $siteId
+     *
+     * @return Collection
+     */
     public function findWithUseReferences($siteId)
     {
         $where = "function() { return this.useReferences && Object.keys(this.useReferences).length > 0; }";

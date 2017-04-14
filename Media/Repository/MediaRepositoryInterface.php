@@ -47,6 +47,11 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
     public function removeMedias(array $mediaIds);
 
     /**
+     * @param $siteId
+     */
+    public function removeAllBySiteId($siteId);
+
+    /**
      * @param PaginateFinderConfiguration $configuration
      * @param string                      $siteId
      *
@@ -67,4 +72,11 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
      * @return int
      */
     public function countWithFilter(PaginateFinderConfiguration $configuration, $siteId);
+
+    /**
+     * @param $siteId
+     *
+     * @return Collection
+     */
+    public function findWithUseReferences($siteId);
 }
