@@ -55,7 +55,9 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
     public function findForPaginate(PaginateFinderConfiguration $configuration, $siteId);
 
     /**
-     * @param string $siteId
+     * @param string      $siteId
+     * @param string|null $type
+     * @param array|null  $foldersId
      * @return int
      */
     public function count($siteId, $type = null, $foldersId = null);

@@ -102,8 +102,9 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
-     * @param string $type
-     * @param string $siteId
+     * @param string      $type
+     * @param string|null $siteId
+     * @param array|null  $foldersId
      *
      * @return int
      */
@@ -181,7 +182,8 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
 
     /**
      * @param array $perimeterFolderIds
-     * @return \MongoId[][][]
+     *
+     * @return array
      */
     protected function generateFilterMediaPerimeter(array $perimeterFolderIds)
     {
