@@ -72,7 +72,7 @@ class Media implements MediaInterface
     /**
      * @var MediaFolderInterface
      *
-     * @ODM\ReferenceOne(targetDocument="OpenOrchestra\Media\Model\MediaFolderInterface", inversedBy="medias")
+     * @ODM\ReferenceOne(targetDocument="OpenOrchestra\Media\Model\MediaFolderInterface")
      */
     protected $mediaFolder;
 

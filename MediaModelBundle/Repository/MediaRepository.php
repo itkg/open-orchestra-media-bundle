@@ -37,6 +37,20 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
+     * @param string $folderId
+     *
+     * @return Collection
+     */
+    public function countByFolderId($folderId)
+    {
+        $qb = $this->createQueryBuilder();
+
+        $qb->field('mediaFolder.id')->equals($folderId);
+
+        return $qb->getQuery()->count();
+    }
+
+    /**
      * @param string $keywords
      *
      * @return array

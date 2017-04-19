@@ -24,13 +24,6 @@ use OpenOrchestra\Mapping\Annotations as ORCHESTRA;
 class MediaFolder extends Folder implements MediaFolderInterface
 {
     /**
-     * @var Collection
-     *
-     * @ODM\ReferenceMany(targetDocument="OpenOrchestra\Media\Model\MediaInterface", mappedBy="mediaFolder")
-     */
-    protected $medias;
-
-    /**
      * @var string $folderId
      *
      * @ODM\Field(type="string")
@@ -64,29 +57,5 @@ class MediaFolder extends Folder implements MediaFolderInterface
     public function getFolderId()
     {
         return $this->folderId;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getMedias()
-    {
-        return $this->medias;
-    }
-
-    /**
-     * @param MediaInterface $media
-     */
-    public function addMedia(MediaInterface $media)
-    {
-        $this->medias->add($media);
-    }
-
-    /**
-     * @param MediaInterface $media
-     */
-    public function removeMedia(MediaInterface $media)
-    {
-        $this->medias->removeElement($media);
     }
 }
