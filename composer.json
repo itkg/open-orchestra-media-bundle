@@ -15,7 +15,7 @@
     "open-orchestra/open-orchestra-mongo-libs": "self.version",
     "doctrine/data-fixtures": "1.1.1",
     "stof/doctrine-extensions-bundle": "1.2.1",
-    "innocead/captcha-bundle": "@dev"
+    "innocead/captcha-bundle": "@dev",
   },
   "require-dev": {
     "open-orchestra/open-orchestra-base-bundle": "self.version",
