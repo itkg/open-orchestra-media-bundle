@@ -120,6 +120,25 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
     }
 
     /**
+     * @param string $parentId
+     * @param string $siteId
+     *
+     * @return number
+     */
+    public function countChildren($parentId, $siteId)
+    {
+        $qa = $this->createAggregationQuery();
+        $qa->match(
+            array(
+                'siteId'     => $siteId,
+                'parent.$id' => new \MongoId($parentId)
+            )
+        );
+
+        return $this->countDocumentAggregateQuery($qa);
+    }
+
+    /**
      * @param string $id
      *
      * @return FolderInterface

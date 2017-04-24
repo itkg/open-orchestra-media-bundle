@@ -45,4 +45,12 @@ interface FolderRepositoryInterface
      * @param $siteId
      */
     public function removeAllBySiteId($siteId);
+
+    /**
+     * @param string $parentId
+     * @param string $siteId
+     *
+     * @return number
+     */
+    public function countChildren($parentId, $siteId);
 }
