@@ -4,9 +4,7 @@ namespace OpenOrchestra\MediaModelBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Doctrine\Common\Collections\Collection;
 use OpenOrchestra\Media\Model\MediaFolderInterface;
-use OpenOrchestra\Media\Model\MediaInterface;
 use OpenOrchestra\Mapping\Annotations as ORCHESTRA;
 
 /**

@@ -2,8 +2,6 @@
 
 namespace OpenOrchestra\Media\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Interface MediaFolderInterface
  */
