@@ -89,4 +89,12 @@ interface MediaRepositoryInterface extends UseTrackableTraitInterface
      * @return Collection
      */
     public function findWithUseReferences($siteId);
+
+    /**
+     * @param string $mediaId
+     * @param string $type
+     *
+     * @return boolean
+     */
+    public function isMediaTypeOf($mediaId, $type);
 }

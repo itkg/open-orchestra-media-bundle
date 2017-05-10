@@ -128,6 +128,21 @@ class MediaRepository extends AbstractAggregateRepository implements MediaReposi
     }
 
     /**
+     * @param string $mediaId
+     * @param string $type
+     *
+     * @return boolean
+     */
+    public function isMediaTypeOf($mediaId, $type)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->field('id')->equals(new \MongoId($mediaId))
+           ->field('mediaType')->equals($type);
+
+        return $qb->getQuery()->count() !== 0;
+    }
+
+    /**
      * @param string      $type
      * @param string|null $siteId
      * @param array|null  $foldersId
