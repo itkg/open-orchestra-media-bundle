@@ -15,7 +15,7 @@ use OpenOrchestra\Mapping\Annotations as ORCHESTRA;
  * )
  * @ORCHESTRA\Document(
  *   generatedField="folderId",
- *   sourceField="name",
+ *   sourceField="names",
  *   serviceName="open_orchestra_media.repository.media_folder",
  * )
  */

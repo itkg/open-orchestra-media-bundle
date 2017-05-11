@@ -37,11 +37,9 @@ abstract class Folder implements FolderInterface
     protected $id;
 
     /**
-     * @var string $name
-     *
-     * @ODM\Field(type="string")
+     * @ODM\Field(type="hash")
      */
-    protected $name;
+    protected $names = array();
 
     /**
      * @var FolderInterface
@@ -88,19 +86,56 @@ abstract class Folder implements FolderInterface
     }
 
     /**
-     * @return string
+     * @param array $names
      */
-    public function getName()
+    public function setNames(array $names)
     {
-        return $this->name;
+        foreach ($names as $language => $name) {
+            $this->addName($language, $name);
+        }
     }
 
     /**
+     * @return array
+     */
+    public function getNames()
+    {
+        return $this->names;
+    }
+
+    /**
+     * @param string $language
+     *
+     * @return string
+     */
+    public function getName($language)
+    {
+        if (isset($this->names[$language])) {
+            return $this->names[$language];
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $language
      * @param string $name
      */
-    public function setName($name)
+    public function addName($language, $name)
     {
-        $this->name = $name;
+        if (is_string($language) && is_string($name)) {
+            $this->names[$language] = $name;
+        }
+    }
+
+    /**
+     * @param string $language
+     */
+    public function removeName($language)
+    {
+        if (is_string($language) && isset($this->names[$language])) {
+            unset($this->names[$language]);
+        }
     }
 
     /**

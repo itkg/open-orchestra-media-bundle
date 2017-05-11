@@ -19,14 +19,32 @@ interface FolderInterface extends TimestampableInterface, BlameableInterface
     public function getId();
 
     /**
-     * @return string
+     * @param array $names
      */
-    public function getName();
+    public function setNames(array $names);
 
     /**
+     * @return array
+     */
+    public function getNames();
+
+    /**
+     * @param string $language
+     *
+     * @return string
+     */
+    public function getName($language);
+
+    /**
+     * @param string $language
      * @param string $name
      */
-    public function setName($name);
+    public function addName($language, $name);
+
+    /**
+     * @param string $language
+     */
+    public function removeName($language);
 
     /**
      * @return FolderInterface
