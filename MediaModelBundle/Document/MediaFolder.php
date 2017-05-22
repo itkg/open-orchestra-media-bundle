@@ -2,7 +2,6 @@
 
 namespace OpenOrchestra\MediaModelBundle\Document;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use OpenOrchestra\Media\Model\MediaFolderInterface;
 use OpenOrchestra\Mapping\Annotations as ORCHESTRA;
@@ -27,15 +26,6 @@ class MediaFolder extends Folder implements MediaFolderInterface
      * @ODM\Field(type="string")
      */
     protected $folderId;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->medias = new ArrayCollection();
-    }
 
     /**
      * Set folderId

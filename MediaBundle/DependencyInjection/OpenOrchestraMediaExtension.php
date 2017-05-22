@@ -50,7 +50,6 @@ class OpenOrchestraMediaExtension extends Extension
         $blockType = array(
             GalleryStrategy::NAME,
             SlideshowStrategy::NAME,
-            MediaListByKeywordStrategy::NAME,
             DisplayMediaStrategy::NAME,
         );
 
