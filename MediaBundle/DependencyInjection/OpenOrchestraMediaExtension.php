@@ -5,7 +5,6 @@ namespace OpenOrchestra\MediaBundle\DependencyInjection;
 use OpenOrchestra\Media\DisplayBlock\Strategies\DisplayMediaStrategy;
 use OpenOrchestra\Media\DisplayBlock\Strategies\SlideshowStrategy;
 use OpenOrchestra\Media\DisplayBlock\Strategies\GalleryStrategy;
-use OpenOrchestra\Media\DisplayBlock\Strategies\MediaListByKeywordStrategy;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
