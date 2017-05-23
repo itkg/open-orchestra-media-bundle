@@ -3,6 +3,7 @@
 namespace OpenOrchestra\MediaModelBundle\Repository;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\MongoDB\Query\Builder;
 use OpenOrchestra\Media\Model\FolderInterface;
 use OpenOrchestra\Media\Repository\FolderRepositoryInterface;
 use OpenOrchestra\ModelInterface\Repository\FieldAutoGenerableRepositoryInterface;
@@ -30,6 +31,21 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
         $qb->field('siteId')->equals($siteId);
 
         return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @param string $parentId
+     *
+     * @throws \Exception
+     *
+     * @return Builder
+     */
+    public function findBySite($siteId)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->field('siteId')->equals($siteId);
+
+        return $qb;
     }
 
     /**

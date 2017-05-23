@@ -25,6 +25,7 @@ class OpenOrchestraMediaModelExtension extends Extension
         $loader->load('services.yml');
         $loader->load('validator.yml');
         $loader->load('listener.yml');
+        $loader->load('form.yml');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
