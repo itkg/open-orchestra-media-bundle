@@ -2,10 +2,8 @@
 
 namespace OpenOrchestra\MediaModelBundle\Form\Type\Component;
 
-use OpenOrchestra\Backoffice\Context\ContextBackOfficeInterface;
 use OpenOrchestra\Media\Repository\FolderRepositoryInterface;
-use OpenOrchestra\MediaAdmin\Security\ContributionActionInterface as MediaContributionActionInterface;
-use OpenOrchestra\MediaAdminBundle\Form\Type\Component\AbstractFolderChoiceType;
+use OpenOrchestra\Media\Form\Type\Component\AbstractFolderChoiceType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -18,21 +16,17 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class FolderChoiceType extends AbstractFolderChoiceType
 {
-    protected $currentSiteManager;
     protected $authorizationChecker;
     protected $folderClass;
 
     /**
-     * @param ContextBackOfficeInterface    $currentSiteManager
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param string                        $folderClass
      */
     public function __construct(
-        ContextBackOfficeInterface $currentSiteManager,
         AuthorizationCheckerInterface $authorizationChecker,
         $folderClass
     ) {
-        $this->currentSiteManager = $currentSiteManager;
         $this->authorizationChecker = $authorizationChecker;
         $this->folderClass = $folderClass;
     }
@@ -45,8 +39,6 @@ class FolderChoiceType extends AbstractFolderChoiceType
         $resolver->setDefaults(
             array(
                 'class'         => $this->folderClass,
-                'property'      => 'names[' . $this->currentSiteManager->getBackOfficeLanguage() . ']',
-                'site_id'       => $this->currentSiteManager->getSiteId(),
                 'query_builder' => function (Options $options) {
                     return function(FolderRepositoryInterface $folderRepository) use ($options) {
                         return $folderRepository->findBySite($options['site_id']);
@@ -55,6 +47,14 @@ class FolderChoiceType extends AbstractFolderChoiceType
                 'attr' => array(
                     'class' => 'orchestra-tree-choice',
                 )
+            )
+        );
+        $resolver->setRequired(
+            array(
+                'property',
+                'language',
+                'site_id',
+                'contribution_rigth'
             )
         );
     }
@@ -70,7 +70,7 @@ class FolderChoiceType extends AbstractFolderChoiceType
         foreach ($view->vars['choices'] as $folder) {
             $folders[] = $folder->data;
         }
-        $folders = $this->buildTreeFolders($folders);
+        $folders = $this->buildTreeFolders($folders, $options['language'], $options['contribution_rigth']);
         $view->vars['choices'] = $folders;
     }
 
@@ -78,7 +78,7 @@ class FolderChoiceType extends AbstractFolderChoiceType
      * @param array $folders
      * @param int   $depth
      */
-    protected function buildTreeFolders(array $folders, $depth = 0)
+    protected function buildTreeFolders(array $folders, $language, $contributionRigth, $depth = 0)
     {
         $lastFolder = end($folders);
         $result = array();
@@ -87,20 +87,20 @@ class FolderChoiceType extends AbstractFolderChoiceType
                 'data-depth' => $depth,
                 'data-last' => $folder === $lastFolder,
             );
-            if (!$this->authorizationChecker->isGranted(MediaContributionActionInterface::CREATE_MEDIA_UNDER, $folder)) {
+            if (!$this->authorizationChecker->isGranted($contributionRigth, $folder)) {
                 $options['disabled'] = 'disabled';
             }
             if (!array_key_exists($folder->getId(), $result)) {
                 $result[$folder->getId()] = new ChoiceView(
                     $folder,
                     $folder->getId(),
-                    $folder->getName($this->currentSiteManager->getBackOfficeLanguage()),
+                    $folder->getName($language),
                     $options
                 );
                 if (!$folder->getSubFolders()->isEmpty()) {
                     $result = array_merge(
                         $result,
-                        $this->buildTreeFolders($folder->getSubFolders()->toArray(), $depth + 1)
+                        $this->buildTreeFolders($folder->getSubFolders()->toArray(), $language, $contributionRigth, $depth + 1)
                     );
                 }
             }

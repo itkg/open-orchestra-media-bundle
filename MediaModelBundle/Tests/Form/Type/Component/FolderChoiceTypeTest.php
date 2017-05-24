@@ -20,6 +20,7 @@ class FolderChoiceTypeTest extends AbstractBaseTestCase
 
     protected $siteId = 'fakeSiteId';
     protected $language = 'fakeLanguage';
+    protected $contributionRigth = 'fakeContributionRigth';
     protected $folderClass = 'OpenOrchestra\MediaModelBundle\Document\MediaFolder';
 
 
@@ -28,16 +29,12 @@ class FolderChoiceTypeTest extends AbstractBaseTestCase
      */
     public function setUp()
     {
-        $currentSiteManager = Phake::mock('OpenOrchestra\Backoffice\Context\ContextBackOfficeInterface');
         $authorizationChecker = Phake::mock('Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface');
         $this->folderClass = 'OpenOrchestra\MediaModelBundle\Document\MediaFolder';
 
-        Phake::when($currentSiteManager)->getSiteId()->thenReturn($this->siteId);
-        Phake::when($currentSiteManager)->getBackOfficeLanguage()->thenReturn($this->language);
         Phake::when($authorizationChecker)->isGranted(Phake::anyParameters())->thenReturn(true);
 
         $this->form = new FolderChoiceType(
-            $currentSiteManager,
             $authorizationChecker,
             $this->folderClass
         );
@@ -70,12 +67,18 @@ class FolderChoiceTypeTest extends AbstractBaseTestCase
         Phake::verify($resolver)->setDefaults(
             array(
                 'class'         => $this->folderClass,
-                'property'      => 'names[' . $this->language . ']',
-                'site_id'       => $this->siteId,
                 'query_builder' => function () {},
                 'attr' => array(
                     'class' => 'orchestra-tree-choice',
                 )
+            )
+        );
+        Phake::verify($resolver)->setRequired(
+            array(
+                'property',
+                'language',
+                'site_id',
+                'contribution_rigth'
             )
         );
     }
@@ -110,7 +113,7 @@ class FolderChoiceTypeTest extends AbstractBaseTestCase
 
         $formView->vars['choices'] = $choices;
 
-        $this->form->buildView($formView, $formInterface, array());
+        $this->form->buildView($formView, $formInterface, array('language' => $this->language, 'contribution_rigth' => $this->contributionRigth));
 
         $this->assertSame(array(
             'data-depth' => 0,
