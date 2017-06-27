@@ -18,14 +18,14 @@ interface FolderRepositoryInterface
     public function find($id);
 
     /**
-     * @param string $parentId
+     * @param string $path
      * @param string $siteId
      *
      * @throws \Exception
      *
      * @return Collection
      */
-    public function findByParentAndSite($parentId, $siteId);
+    public function findByPathAndSite($path, $siteId);
 
     /**
      * @param string $siteId
