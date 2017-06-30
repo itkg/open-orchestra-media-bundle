@@ -14,6 +14,27 @@ use OpenOrchestra\Repository\AbstractAggregateRepository;
  */
 class FolderRepository extends AbstractAggregateRepository implements FolderRepositoryInterface, FieldAutoGenerableRepositoryInterface
 {
+
+    /**
+     * @param string $parentId
+     * @param string $siteId
+     *
+     * @throws \Exception
+     *
+     * @deprecated
+     * @return Collection
+     */
+    public function findByParentAndSite($parentId, $siteId)
+    {
+        $qb = $this->createQueryBuilder();
+        if ($parentId) {
+            $qb->field('parent.$id')->equals(new \MongoId($parentId));
+        }
+        $qb->field('siteId')->equals($siteId);
+
+        return $qb->getQuery()->execute();
+     }
+
     /**
      * @param string $path
      * @param string $siteId
