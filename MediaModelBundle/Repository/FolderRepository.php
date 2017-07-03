@@ -47,7 +47,7 @@ class FolderRepository extends AbstractAggregateRepository implements FolderRepo
     {
         $qb = $this->createQueryBuilder();
         $qb->field('siteId')->equals($siteId)
-            ->field('path')->equals(new MongoRegex('/^'.$path.'(\/.*)?$/'));
+            ->field('path')->equals(new \MongoRegex('/^'.$path.'(\/.*)?$/'));
 
         return $qb->getQuery()->execute();
     }
